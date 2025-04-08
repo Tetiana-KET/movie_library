@@ -1,0 +1,51 @@
+{
+	"name": "movie_library",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"lint": "eslint ./src",
+		"lint:fix": "eslint ./src --fix",
+		"lint:css": "stylelint **/*.scss --fix",
+		"lint:all": "npm run lint && npm run lint:css",
+		"prettier": "prettier --check --ignore-unknown src/",
+		"prettier:fix": "prettier ./src --write --ignore-unknown"
+	},
+	"dependencies": {
+		"@typescript-eslint/eslint-plugin": "^8.29.1",
+		"@typescript-eslint/parser": "^8.29.1",
+		"@typescript-eslint/typescript-estree": "^8.29.1",
+		"@typescript-eslint/utils": "^8.29.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-router-dom": "^7.5.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.21.0",
+		"@types/node": "^22.14.0",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"@types/react-router-dom": "^5.3.3",
+		"@vitejs/plugin-react-swc": "^3.8.0",
+		"eslint": "^9.24.0",
+		"eslint-config-prettier": "^10.1.1",
+		"eslint-plugin-prettier": "^5.2.6",
+		"eslint-plugin-react-dom": "^1.41.0",
+		"eslint-plugin-react-hooks": "^5.1.0",
+		"eslint-plugin-react-refresh": "^0.4.19",
+		"eslint-plugin-react-x": "^1.41.0",
+		"globals": "^15.15.0",
+		"prettier": "^3.5.3",
+		"sass": "^1.86.3",
+		"stylelint": "^16.18.0",
+		"stylelint-config-standard": "^38.0.0",
+		"stylelint-config-standard-scss": "^14.0.0",
+		"stylelint-scss": "^6.11.1",
+		"typescript": "~5.7.2",
+		"typescript-eslint": "^8.24.1",
+		"vite": "^6.2.0"
+	}
+}
