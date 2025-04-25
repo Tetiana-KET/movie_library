@@ -1,3 +1,14 @@
+import { HeroSection } from '@/components/HeroSection';
+import { Search } from '@/components/Search';
+import { useState } from 'react';
+
 export const MainPage = () => {
-  return <h1 className="text-3xl font-bold">Hello world!</h1>;
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <div className="wrapper">
+      <HeroSection />
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    </div>
+  );
 };
