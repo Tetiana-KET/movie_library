@@ -1,25 +1,35 @@
-# project name
+# Cinemix
 
 ## [Deploy]()
+
+## [Figma Design](https://www.figma.com/design/kdu6x1bqzyCMbzezudt6s2/Movie-App-w--React?node-id=2-2&p=f&t=Du6vBbRR82WDrjAC-0)
 
 ## Description
 
 ## Key features:
+
+- Browse All Movies: Explore a wide range of movies available on the platform.
+- Search Movies: Easily search for specific movies using a search function.
+- Trending Movies Algorithm: Displays trending movies based on a dynamic algorithm.
+- Modern UI/UX: A sleek and user-friendly interface designed for a great experience.
+- Responsiveness: Fully responsive design that works seamlessly across devices.
 
 ## Technology stack
 
 - Language: [**TypeScript**](https://www.typescriptlang.org/)
 - Main library: [**React**](https://react.dev/)
 - Linters: [**ESLint**](https://eslint.org/), [**Prettier**](https://prettier.io/)
-- Styling: [**SCSS**](https://sass-lang.com/)
+- Styling: [**TailwindCSS**](https://tailwindcss.com/)
 - Builder: [**Vite**](https://vitejs.dev/)
 - Routing: [**React Router**](https://reactrouter.com/en/main)
-- Hosting: [**Vercel**](https://vercel.com/) -->
 - Hosting: [**Netlify**](https://www.netlify.com/)
+- Backend: [**Appwrite**](https://cloud.appwrite.io/console/onboarding)
 
 ## Visuals
 
 # Installation
+
+Follow these steps to set up the project locally on your machine.
 
 ### Prerequisites
 
@@ -129,10 +139,17 @@ This will fix all fixable issues in your code (like formatting or minor rule vio
 To check if the production build looks OK in your local environment use:
 
 ```
+npm run build
 npm run preview
 ```
 
 This command uses vite preview to serve the production build locally. _Note: vite preview is intended for previewing the build locally, not as a production server._
+
+**Or use a one-liner:**
+
+```
+npm run preview:build
+```
 
 ### Prettier check
 
