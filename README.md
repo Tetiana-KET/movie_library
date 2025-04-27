@@ -1,10 +1,12 @@
 # Cinemix
 
-## [Deploy]()
+## [Deploy](https://movie-library-cinemix.netlify.app/)
 
 ## [Figma Design](https://www.figma.com/design/kdu6x1bqzyCMbzezudt6s2/Movie-App-w--React?node-id=2-2&p=f&t=Du6vBbRR82WDrjAC-0)
 
 ## Description
+
+Movie Library is a modern and responsive web application that allows users to discover, search, and explore a variety of movies. With a clean UI and smooth user experience, it showcases trending content dynamically and ensures accessibility across all devices.
 
 ## Key features:
 
