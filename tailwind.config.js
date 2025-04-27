@@ -7,6 +7,7 @@ const config = {
         'light-200': 'var(--color-light-200)',
         'gray-100': 'var(--color-gray-100)',
         'dark-100': 'var(--color-dark-100)',
+        accent: 'var(--color-accent)',
         primary: 'var(--color-primary)',
       },
       fontFamily: {
