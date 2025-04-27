@@ -1,4 +1,5 @@
 import { HeroSection } from '@/components/HeroSection';
+import { MoviesList } from '@/components/MoviesList';
 import { Search } from '@/components/Search';
 import { Spinner } from '@/components/ui/Spinner';
 import { MovieInterface } from '@/models/MovieInterface';
@@ -36,15 +37,7 @@ export const MainPage = () => {
         <h2>All movies</h2>
         {isLoading && <Spinner />}
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-        <ul>
-          {movieList.length &&
-            movieList.map((movie) => (
-              <li key={movie.id} className="movie-card">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="a poster for movie" />
-                <h3>{movie.title}</h3>
-              </li>
-            ))}
-        </ul>
+        {movieList.length && <MoviesList movieList={movieList} />}
       </section>
     </div>
   );
