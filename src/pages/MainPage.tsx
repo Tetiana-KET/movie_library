@@ -2,7 +2,9 @@ import { HeroSection } from '@/components/HeroSection';
 import { MoviesList } from '@/components/MoviesList';
 import { Search } from '@/components/Search';
 import { Spinner } from '@/components/ui/Spinner';
+import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { MovieInterface } from '@/models/MovieInterface';
+import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
 import { useEffect, useState } from 'react';
 
@@ -26,6 +28,18 @@ export const MainPage = () => {
       })
       .finally(() => {
         setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchGenres()
+      .then((data) => {
+        data.genres.forEach((genre) => {
+          GENRES_MAP[genre.id] = genre.name;
+        });
+      })
+      .catch((e: Error) => {
+        setErrorMessage(e.message);
       });
   }, []);
 

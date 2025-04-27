@@ -42,7 +42,7 @@
   }
 
   .wrapper {
-    @apply px-5 max-w-7xl mx-auto flex flex-col relative z-10;
+    @apply px-5 max-w-[1620px] mx-auto flex flex-col relative z-10;
   }
 
   .hero img {
@@ -118,11 +118,12 @@
     }
 
     & h3 {
-      @apply text-white font-bold text-base line-clamp-1;
+      @apply text-white font-bold text-base line-clamp-1 mb-2;
     }
 
-    & .content {
-      @apply mt-2 flex flex-row items-center flex-wrap gap-2;
+    & .content,
+    & .genres {
+      @apply flex flex-row items-center flex-wrap gap-1;
     }
 
     & .rating {
@@ -141,12 +142,19 @@
       @apply text-sm text-gray-100;
     }
 
-    & .content .lang {
+    & .content .lang,
+    & .genres span {
       @apply capitalize text-gray-100 font-medium text-base;
     }
 
+    & .genres span::after {
+      content: '•';
+      margin-left: 4px;
+      font-size: 14px;
+    }
+
     & .content .year {
-      @apply text-gray-100 font-medium text-base;
+      @apply text-gray-200 font-medium text-base;
     }
   }
 }

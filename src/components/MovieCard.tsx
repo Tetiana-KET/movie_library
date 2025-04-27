@@ -1,27 +1,15 @@
 import { MovieInterface } from '@/models/MovieInterface';
 import { StarIcon } from './ui/StarIcon';
+import { GENRES_MAP } from '@/consts/GENRES_MAP';
 
 interface MovieCard {
   movie: MovieInterface;
 }
 
 export const MovieCard = ({ movie }: MovieCard) => {
-  const {
-    adult,
-    backdrop_path,
-    genre_ids,
-    id,
-    original_language,
-    original_title,
-    overview,
-    popularity,
-    poster_path,
-    release_date,
-    title,
-    video,
-    vote_average,
-    vote_count,
-  } = movie;
+  const { genre_ids, poster_path, release_date, title, vote_average } = movie;
+
+  const genreList = genre_ids.map((id) => GENRES_MAP[id]).filter(Boolean);
 
   return (
     <li className="movie-card">
@@ -42,8 +30,14 @@ export const MovieCard = ({ movie }: MovieCard) => {
             <p>{vote_average.toFixed(1) || 'N/A'}</p>
           </div>
           <span>•</span>
-          <p className="lang">{original_language}</p>
-          <span>•</span>
+
+          {genreList.length && (
+            <div className="genres">
+              {genreList.slice(0, 2).map((name) => (
+                <span key={name}>{name}</span>
+              ))}
+            </div>
+          )}
           <p className="year">{release_date.split('-')[0] || 'N/A'}</p>
         </div>
       </div>
