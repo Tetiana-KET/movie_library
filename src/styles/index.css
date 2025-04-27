@@ -12,7 +12,7 @@
   --color-dark-100: #0f0d23;
   --font-dm-sans: DM Sans, sans-serif;
   --breakpoint-xs: 480px;
-  --background-image-hero-pattern: url('/bg.png');
+  --background-image-hero-pattern: url('/bg.webp');
   --shadow-footer: 0px 0px 10px 2px var(--color-light-100);
 }
 
@@ -102,8 +102,8 @@
     }
   }
 
-  .all-movies {
-    @apply space-y-9;
+  .movies {
+    @apply space-y-9 pb-3;
 
     & ul {
       @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
