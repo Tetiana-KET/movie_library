@@ -1,4 +1,4 @@
-import { API_OPTIONS, BASE_URL } from '@/consts/api';
+import { getApiOptions, BASE_URL } from '@/consts/api';
 import { Genre } from '@/models/Genre';
 
 interface GenresResponse {
@@ -7,7 +7,7 @@ interface GenresResponse {
 
 export const fetchGenres = async (): Promise<GenresResponse> => {
   const endpoint = `${BASE_URL}/genre/movie/list?language=en`;
-  const response = await fetch(endpoint, API_OPTIONS);
+  const response = await fetch(endpoint, getApiOptions());
 
   if (!response.ok) {
     throw new Error('Failed to fetch genres');
