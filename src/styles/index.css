@@ -34,6 +34,17 @@
   h2 {
     @apply text-2xl font-bold text-white sm:text-3xl;
   }
+
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    @apply overflow-hidden;
+  }
 }
 
 @layer components {
@@ -42,7 +53,7 @@
   }
 
   .wrapper {
-    @apply px-5 max-w-[1620px] mx-auto flex flex-col relative z-10;
+    @apply px-5 max-w-[1440px] mx-auto flex flex-col relative z-10;
   }
 
   .hero img {
@@ -103,18 +114,22 @@
   }
 
   .movies {
-    @apply space-y-9 pb-3;
+    @apply space-y-9 mb-12;
 
     & ul {
-      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+      @apply grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
     }
   }
 
   .movie-card {
-    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10;
+    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10 h-full;
+
+    & .ratio-box {
+      @apply w-full h-0 pt-[70%] relative overflow-hidden;
+    }
 
     & img {
-      @apply rounded-lg h-auto w-full;
+      @apply rounded-lg h-full w-full object-cover absolute top-0;
     }
 
     & h3 {
