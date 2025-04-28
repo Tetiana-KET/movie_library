@@ -7,7 +7,7 @@ export const Layout = () => {
       <div className="pattern" />
       <header className="py-10">
         <div className="wrapper"></div>
-        <img width={90} src="/logo.png" alt="logo image" />
+        <img width={90} height={65} src="/logo.png" alt="logo image" loading="eager" />
       </header>
       <main>
         <Outlet />

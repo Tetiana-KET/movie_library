@@ -18,7 +18,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
           <img
             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
             alt={`a poster for movie: ${title}`}
-            style={{ objectPosition: 'center 25%' }}
+            style={{ objectPosition: 'center 35%' }}
             onError={(e) => {
               const target = e.currentTarget;
               target.onerror = null;

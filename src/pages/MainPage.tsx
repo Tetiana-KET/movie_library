@@ -3,6 +3,7 @@ import { MoviesList } from '@/components/MoviesList';
 import { Search } from '@/components/Search';
 import { Spinner } from '@/components/ui/Spinner';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
+import { useDebounce } from '@/hooks/useDebounce';
 import { MovieInterface } from '@/models/MovieInterface';
 import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
@@ -14,11 +15,13 @@ export const MainPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
 
+  const debouncedQuery = useDebounce(searchQuery, 500);
+
   useEffect(() => {
     setIsLoading(true);
     setErrorMessage('');
 
-    fetchMovies()
+    fetchMovies(debouncedQuery)
       .then((data) => {
         setMovieList(data.results);
       })
@@ -29,7 +32,7 @@ export const MainPage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [debouncedQuery]);
 
   useEffect(() => {
     fetchGenres()
@@ -48,7 +51,7 @@ export const MainPage = () => {
       <HeroSection />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <section className="movies">
-        <h2>All movies</h2>
+        <h2>Popular</h2>
         {isLoading && <Spinner />}
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
         {movieList.length && <MoviesList movieList={movieList} />}
