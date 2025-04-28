@@ -93,7 +93,7 @@
     }
 
     & ul li p {
-      @apply fancy-text mt-[12px] text-nowrap leading-none;
+      @apply fancy-text mt-[12px] text-nowrap leading-none w-[87px] text-right;
     }
 
     & ul li img {

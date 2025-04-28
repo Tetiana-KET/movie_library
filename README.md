@@ -8,13 +8,53 @@
 
 Movie Library is a modern and responsive web application that allows users to discover, search, and explore a variety of movies. With a clean UI and smooth user experience, it showcases trending content dynamically and ensures accessibility across all devices.
 
+This project uses a free public movie API (TMDB) and therefore full movie playback is not available. Users can view movie descriptions, posters, and trailers.
+
+Designed as a lightweight and efficient tool for discovering new movies, managing favorites, and watching trailers.
+
 ## Key features:
 
-- Browse All Movies: Explore a wide range of movies available on the platform.
-- Search Movies: Easily search for specific movies using a search function.
-- Trending Movies Algorithm: Displays trending movies based on a dynamic algorithm.
-- Modern UI/UX: A sleek and user-friendly interface designed for a great experience.
-- Responsiveness: Fully responsive design that works seamlessly across devices.
+-[x] **Browse All Movies**
+Explore a wide range of movies across different genres, with easy navigation through detailed movie listings.
+
+-[] **Pagination**
+Use pagination for easier browsing of long lists of movies.
+
+-[x] **Search Movies**
+Quickly find specific movies by title using an intuitive search bar.
+
+-[x] **Trending Movies Algorithm**
+A dynamic system that highlights trending movies based on user searches and popularity.
+
+-[] **Hero Banner Featuring Trending Movies**
+The homepage features a dynamic hero banner showcasing the most popular movies.
+
+-[] **User Authentication (Login/Signup)**
+Allow users to create accounts to save their favorites and personalize their experience.
+
+-[] **Favorites Management**
+Add and remove movies from your personal favorites list for quick access to your preferred titles.
+
+-[] **Details Page with Trailers**
+Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
+
+-[] **Advanced Filtering**
+Filter movies by release year, genre, or even exclude unwanted genres (e.g., include "comedy" but exclude "thriller").
+
+-[] **Sorting Functionality**
+Sort movies by release year, rating, popularity, or other available fields for a more personalized browsing experience.
+
+-[] **Dark/Light Mode**
+Use a theme toggle to switch between dark and light modes based on user preference.
+
+-[x] **Modern UI/UX**
+A clean, modern, and user-friendly interface focused on great user experience and smooth navigation.
+
+-[x] **Responsive Design**
+Fully responsive layout ensuring a seamless experience across mobile, tablet, and desktop devices.
+
+-[] **Error Handling and Loading States**
+Proper error messages and loading indicators provide clear feedback to users during interactions.
 
 ## Technology stack
 
