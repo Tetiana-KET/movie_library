@@ -21,6 +21,7 @@
     "@typescript-eslint/parser": "^8.29.1",
     "@typescript-eslint/typescript-estree": "^8.29.1",
     "@typescript-eslint/utils": "^8.29.1",
+    "appwrite": "^17.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0",

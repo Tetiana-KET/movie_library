@@ -1,10 +1,13 @@
+import { getTrendingMovies } from '@/appwrite';
 import { HeroSection } from '@/components/HeroSection';
 import { MoviesList } from '@/components/MoviesList';
 import { Search } from '@/components/Search';
+import { TrendingMovies } from '@/components/TrendingMovies';
 import { Spinner } from '@/components/ui/Spinner';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { useDebounce } from '@/hooks/useDebounce';
 import { MovieInterface } from '@/models/MovieInterface';
+import { TrendingMovie } from '@/models/TrendingMovie';
 import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
 import { useEffect, useState } from 'react';
@@ -14,8 +17,26 @@ export const MainPage = () => {
   const [errorMessage, setErrorMessage] = useState<string | ''>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([]);
 
-  const debouncedQuery = useDebounce(searchQuery, 500);
+  const debouncedQuery = useDebounce(searchQuery, 700);
+
+  useEffect(() => {
+    getTrendingMovies()
+      .then((data) => {
+        const mappedTrendingMovies = data.documents.map((doc) => ({
+          searchTerm: doc.searchTerm as string,
+          count: doc.count as number,
+          poster_url: doc.poster_url as string,
+          movie_id: doc.movie_id as number,
+        }));
+
+        setTrendingMovies(mappedTrendingMovies);
+      })
+      .catch((e: Error) => {
+        console.log(e.message);
+      });
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,7 +63,7 @@ export const MainPage = () => {
         });
       })
       .catch((e: Error) => {
-        setErrorMessage(e.message);
+        console.log(e.message);
       });
   }, []);
 
@@ -50,6 +71,7 @@ export const MainPage = () => {
     <div className="wrapper">
       <HeroSection />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {trendingMovies && <TrendingMovies trendingMovies={trendingMovies} />}
       <section className="movies">
         <h2>Popular</h2>
         {isLoading && <Spinner />}

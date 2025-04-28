@@ -1,3 +1,4 @@
+import { updateSearchCount } from '@/appwrite';
 import { getApiOptions, BASE_URL } from '@/consts/api';
 import { FETCHING_ERROR_MSG } from '@/consts/messages';
 import { FetchResultInterface } from '@/models/FetchResultInterface';
@@ -12,5 +13,11 @@ export const fetchMovies = async (query: string): Promise<FetchResultInterface> 
     throw new Error(FETCHING_ERROR_MSG);
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  if (query && data.results.length) {
+    await updateSearchCount(query, data.results[0]);
+  }
+
+  return data;
 };
