@@ -49,7 +49,7 @@
 
 @layer components {
   .pattern {
-    @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute top-0 left-0 z-0;
+    @apply bg-hero-pattern w-full h-screen bg-center bg-cover absolute top-0 left-0 z-0;
   }
 
   .wrapper {
@@ -78,27 +78,31 @@
   }
 
   .trending {
-    @apply mt-20;
+    @apply mb-21;
+
+    & h2 {
+      @apply mb-[20px];
+    }
 
     & ul {
-      @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+      @apply grid grid-cols-1 min-[400px]:grid-cols-2 gap-1.5 sm:grid-cols-3 lg:grid-cols-6;
     }
 
     & ul li {
-      @apply min-w-[230px] flex flex-row items-center;
+      @apply flex flex-row items-center justify-center md:justify-start;
     }
 
     & ul li p {
-      @apply fancy-text mt-[22px] text-nowrap;
+      @apply fancy-text mt-[12px] text-nowrap leading-none;
     }
 
     & ul li img {
-      @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
+      @apply w-[107px] h-[143px] rounded-lg object-cover -ml-1.5;
     }
   }
 
   .search {
-    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[65px] max-w-[640px] mx-auto;
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[100px] max-w-[640px] mx-auto;
 
     & div {
       @apply relative flex items-center;
@@ -179,9 +183,10 @@
 }
 
 @utility fancy-text {
-  -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
-  font-size: 190px;
-  font-family: 'Bebas Neue', sans-serif;
+  -webkit-text-stroke: 1px rgba(206, 206, 251, 0.5);
+  font-size: 140px;
+  font-weight: bold;
+  font-family: DM Sans;
 }
 
 @utility hide-scrollbar {
