@@ -3,10 +3,10 @@ import { getApiOptions, BASE_URL } from '@/consts/api';
 import { FETCHING_ERROR_MSG } from '@/consts/messages';
 import { FetchResultInterface } from '@/models/FetchResultInterface';
 
-export const fetchMovies = async (query: string): Promise<FetchResultInterface> => {
+export const fetchMovies = async (query: string, currentPage: number): Promise<FetchResultInterface> => {
   const endpoint = query
-    ? `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
-    : `${BASE_URL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`;
+    ? `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${currentPage}`
+    : `${BASE_URL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=${currentPage}&sort_by=popularity.desc`;
   const response = await fetch(endpoint, getApiOptions());
 
   if (!response.ok) {

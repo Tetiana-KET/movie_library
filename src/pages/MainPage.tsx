@@ -1,6 +1,7 @@
 import { getTrendingMovies } from '@/appwrite';
 import { HeroSection } from '@/components/HeroSection';
 import { MoviesList } from '@/components/MoviesList';
+import Pagination from '@/components/Pagination';
 import { Search } from '@/components/Search';
 import { TrendingMovies } from '@/components/TrendingMovies';
 import { Spinner } from '@/components/ui/Spinner';
@@ -18,6 +19,8 @@ export const MainPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
   const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const debouncedQuery = useDebounce(searchQuery, 700);
 
@@ -42,9 +45,10 @@ export const MainPage = () => {
     setIsLoading(true);
     setErrorMessage('');
 
-    fetchMovies(debouncedQuery)
+    fetchMovies(debouncedQuery, currentPage)
       .then((data) => {
         setMovieList(data.results);
+        setTotalPages(Math.min(data.total_pages, 500));
       })
       .catch((e: Error) => {
         setErrorMessage(e.message);
@@ -53,7 +57,7 @@ export const MainPage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [debouncedQuery]);
+  }, [debouncedQuery, currentPage]);
 
   useEffect(() => {
     fetchGenres()
@@ -67,6 +71,18 @@ export const MainPage = () => {
       });
   }, []);
 
+  const handleNextButtonClick = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrevButtonClick = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
+
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="wrapper">
       <HeroSection />
@@ -78,6 +94,13 @@ export const MainPage = () => {
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
         {movieList.length && <MoviesList movieList={movieList} />}
       </section>
+      <Pagination
+        onNextPageClick={handleNextButtonClick}
+        onPrevPageClick={handlePrevButtonClick}
+        onPageClick={handlePageClick}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

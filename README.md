@@ -16,9 +16,18 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 
 - [x] **Browse All Movies**
       Explore a wide range of movies across different genres, with easy navigation through detailed movie listings.
+      **Note:** Only the first 10,000 results (500 pages) are available due to limitations of the _free_ API tier.
 
-- [] **Pagination**
-  Use pagination for easier browsing of long lists of movies.
+- [x] **Pagination**
+      Navigate efficiently through movie results with advanced pagination.  
+       Includes:
+
+      - Navigation arrows to move forward and backward one page at a time.
+      - Display of the first and last page for quick access.
+      - Current page highlighted with two adjacent page numbers before and after it.
+      - Ellipsis (`...`) to represent skipped page ranges for cleaner UI on large datasets.
+      - Responsive adjustments to reduce visible buttons on smaller screens.
+      - Maximum of 500 pages displayed due to limitations of the free API.
 
 - [x] **Search Movies**
       Quickly find specific movies by title using an intuitive search bar.
@@ -54,7 +63,7 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
       A clean, modern, and user-friendly interface focused on great user experience and smooth navigation.
 
 - [x] **Responsive Design**
-      Fully responsive layout ensuring a seamless experience across mobile, tablet, and desktop devices.
+      Fully responsive layout down to 320px screen width, ensuring a seamless experience across mobile, tablet, and desktop devices.
 
 - [] **Error Handling and Loading States**
   Proper error messages and loading indicators provide clear feedback to users during interactions.
