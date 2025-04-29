@@ -34,6 +34,11 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 
 - [x] **Trending Movies Algorithm**
       A dynamic system that highlights trending movies based on user searches and popularity.
+- [ ] **Trending Slider with Auto and Manual Navigation**  
+       Animated carousel showcasing trending movies.  
+       The slider automatically scroll in one direction, then smoothly reverse when it reaches the end, creating a continuous motion effect.  
+       Users can also manually navigate through the movies using forward and backward buttons.  
+       If the user scrolls to the end manually, the next interaction resets the slider to the beginning.
 
 - [] **Hero Banner Featuring Trending Movies**
   The homepage features a dynamic hero banner showcasing the most popular movies.
@@ -55,6 +60,11 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 
 - [] **Dark/Light Mode**
   Use a theme toggle to switch between dark and light modes based on user preference.
+
+- [] **Scroll to Top Button**  
+   A "Scroll to Top" button that appears when the user scrolls down the page.  
+   This button allows users to quickly return to the top of the page for easier navigation, especially when browsing long lists of movies.  
+   It fades in when the user scrolls down and fades out when the user is at the top of the page.
 
 - [] **Internationalization (i18n)**
   Support multiple languages to reach a broader audience.
