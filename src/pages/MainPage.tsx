@@ -26,6 +26,19 @@ export const MainPage = () => {
   const debouncedQuery = useDebounce(searchQuery, 700);
 
   useEffect(() => {
+    fetchGenres()
+      .then((data) => {
+        data.genres.forEach((genre) => {
+          GENRES_MAP[genre.id] = genre.name;
+        });
+        console.log(GENRES_MAP);
+      })
+      .catch((e: Error) => {
+        console.log(e.message);
+      });
+  }, []);
+
+  useEffect(() => {
     getTrendingMovies()
       .then((data) => {
         const mappedTrendingMovies = data.documents.map((doc) => ({
@@ -59,18 +72,6 @@ export const MainPage = () => {
         setIsLoading(false);
       });
   }, [debouncedQuery, currentPage]);
-
-  useEffect(() => {
-    fetchGenres()
-      .then((data) => {
-        data.genres.forEach((genre) => {
-          GENRES_MAP[genre.id] = genre.name;
-        });
-      })
-      .catch((e: Error) => {
-        console.log(e.message);
-      });
-  }, []);
 
   const handleNextButtonClick = () => {
     setCurrentPage((prev) => prev + 1);

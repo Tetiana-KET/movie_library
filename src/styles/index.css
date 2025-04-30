@@ -15,6 +15,7 @@
   --breakpoint-xs: 480px;
   --background-image-hero-pattern: url('/bg.webp');
   --shadow-footer: 0px 0px 10px 2px var(--color-light-100);
+  --shadow-details: 0px 0px 60px 10px #eecefb5c;
 }
 
 @layer base {
@@ -50,6 +51,10 @@
   [disabled] {
     @apply pointer-events-none opacity-50;
   }
+
+  .button {
+    @apply bg-light-100/10 p-4 rounded-lg shadow-inner text-center shadow-light-100/10;
+  }
 }
 
 @layer components {
@@ -58,7 +63,7 @@
   }
 
   .wrapper {
-    @apply px-5 max-w-[1440px] mx-auto flex flex-col relative z-10;
+    @apply px-5 max-w-[1620px] mx-auto flex flex-col relative z-10;
   }
 
   .hero img {

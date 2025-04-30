@@ -1,3 +1,4 @@
+import { DetailsHeader } from '@/components/details/DetailsHeader';
 import { MovieDetails } from '@/models/MovieDetails';
 import { VideoInterface } from '@/models/VideoResponse';
 import { fetchMovieDetails } from '@/services/fetchMovieDetails';
@@ -12,6 +13,18 @@ export const MovieDetailsPage = () => {
 
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [trailer, setTrailer] = useState<VideoInterface | null>(null);
+
+  const detailsHeaderProps = movieDetails
+    ? {
+        title: movieDetails.title,
+        vote_average: movieDetails.vote_average,
+        vote_count: movieDetails.vote_count,
+        release_date: movieDetails.release_date,
+        genres: movieDetails.genres,
+        runtime: movieDetails.runtime,
+        adult: movieDetails.adult,
+      }
+    : null;
 
   useEffect(() => {
     if (!movieId) return;
@@ -31,9 +44,8 @@ export const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div className="px-5 max-w-[1440px] mx-auto text-light-100 relative z-1">
-      {movieDetails?.title}
-      {trailer?.key}
+    <div className="max-w-[1620px] h-[600px] mx-auto text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details ">
+      {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
     </div>
   );
 };

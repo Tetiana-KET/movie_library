@@ -9,7 +9,7 @@ export const Layout = () => {
         <div className="wrapper"></div>
         <img width={90} height={65} src="/logo.png" alt="logo image" loading="eager" />
       </header>
-      <main>
+      <main className="flex-1 px-5">
         <Outlet />
       </main>
       <Footer />
