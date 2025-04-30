@@ -1,6 +1,7 @@
 import { MovieInterface } from '@/models/MovieInterface';
 import { StarIcon } from './ui/StarIcon';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
+import { Link } from 'react-router-dom';
 
 interface MovieCard {
   movie: MovieInterface;
@@ -13,40 +14,42 @@ export const MovieCard = ({ movie }: MovieCard) => {
 
   return (
     <li>
-      <figure className="movie-card">
-        <div className="ratio-box">
-          <img
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={`a poster for movie: ${title}`}
-            style={{ objectPosition: 'center 35%' }}
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.onerror = null;
-              target.src = '/no-poster.webp';
-            }}
-            loading="lazy"
-          />
-        </div>
-        <figcaption className="mt-4">
-          <h3>{title}</h3>
-          <div className="content">
-            <div className="rating">
-              <StarIcon />
-              <p>{vote_average.toFixed(1) || 'N/A'}</p>
-            </div>
-            <span>•</span>
-
-            {genreList.length && (
-              <div className="genres">
-                {genreList.slice(0, 2).map((name) => (
-                  <span key={name}>{name}</span>
-                ))}
-              </div>
-            )}
-            <p className="year">{release_date.split('-')[0] || 'N/A'}</p>
+      <Link to={`/movie/${movie.id}`}>
+        <figure className="movie-card">
+          <div className="ratio-box">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={`a poster for movie: ${title}`}
+              style={{ objectPosition: 'center 35%' }}
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.onerror = null;
+                target.src = '/no-poster.webp';
+              }}
+              loading="lazy"
+            />
           </div>
-        </figcaption>
-      </figure>
+          <figcaption className="mt-4">
+            <h3>{title}</h3>
+            <div className="content">
+              <div className="rating">
+                <StarIcon />
+                <p>{vote_average.toFixed(1) || 'N/A'}</p>
+              </div>
+              <span>•</span>
+
+              {genreList.length && (
+                <div className="genres">
+                  {genreList.slice(0, 2).map((name) => (
+                    <span key={name}>{name}</span>
+                  ))}
+                </div>
+              )}
+              <p className="year">{release_date.split('-')[0] || 'N/A'}</p>
+            </div>
+          </figcaption>
+        </figure>
+      </Link>
     </li>
   );
 };
