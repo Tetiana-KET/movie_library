@@ -1,4 +1,5 @@
 import { DetailsHeader } from '@/components/details/DetailsHeader';
+import { TrailerSection } from '@/components/details/TrailerSection';
 import { MovieDetails } from '@/models/MovieDetails';
 import { VideoInterface } from '@/models/VideoResponse';
 import { fetchMovieDetails } from '@/services/fetchMovieDetails';
@@ -44,8 +45,14 @@ export const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div className="max-w-[1620px] h-[600px] mx-auto text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details ">
+    <div className="max-w-[1620px] mx-auto text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details ">
       {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
+      <TrailerSection
+        youtubeKey={trailer?.key}
+        trailerName={trailer?.name}
+        backdropPath={movieDetails?.backdrop_path}
+        posterPath={movieDetails?.poster_path}
+      />
     </div>
   );
 };

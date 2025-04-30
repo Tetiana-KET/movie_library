@@ -31,7 +31,6 @@ export const MainPage = () => {
         data.genres.forEach((genre) => {
           GENRES_MAP[genre.id] = genre.name;
         });
-        console.log(GENRES_MAP);
       })
       .catch((e: Error) => {
         console.log(e.message);
