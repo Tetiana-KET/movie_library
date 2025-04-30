@@ -1,10 +1,11 @@
 import { TrendingMovie } from '@/models/TrendingMovie';
+import React from 'react';
 
 interface TrendingMoviesProps {
   trendingMovies: TrendingMovie[];
 }
 
-export const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
+const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
   return (
     <section className="trending">
       <h2>Trending</h2>
@@ -21,3 +22,5 @@ export const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
     </section>
   );
 };
+
+export default React.memo(TrendingMovies);

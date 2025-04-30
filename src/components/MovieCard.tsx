@@ -24,6 +24,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
               target.onerror = null;
               target.src = '/no-poster.webp';
             }}
+            loading="lazy"
           />
         </div>
         <figcaption className="mt-4">

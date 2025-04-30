@@ -1,3 +1,4 @@
+import React from 'react';
 import { SearchIcon } from './ui/SearchIcon';
 
 interface SearchProps {
@@ -5,7 +6,7 @@ interface SearchProps {
   setSearchQuery: (query: string) => void;
 }
 
-export const Search = ({ searchQuery, setSearchQuery }: SearchProps) => {
+const Search = ({ searchQuery, setSearchQuery }: SearchProps) => {
   return (
     <div className="search">
       <div>
@@ -21,3 +22,5 @@ export const Search = ({ searchQuery, setSearchQuery }: SearchProps) => {
     </div>
   );
 };
+
+export default React.memo(Search);

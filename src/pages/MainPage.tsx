@@ -1,9 +1,10 @@
 import { getTrendingMovies } from '@/appwrite';
-import { HeroSection } from '@/components/HeroSection';
+
+import HeroSection from '@/components/HeroSection';
+import TrendingMovies from '@/components/TrendingMovies';
+import Search from '@/components/Search';
 import { MoviesList } from '@/components/MoviesList';
-import Pagination from '@/components/Pagination';
-import { Search } from '@/components/Search';
-import { TrendingMovies } from '@/components/TrendingMovies';
+import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -85,22 +86,25 @@ export const MainPage = () => {
 
   return (
     <div className="wrapper">
+      {isLoading && <Spinner />}
+
       <HeroSection />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies && <TrendingMovies trendingMovies={trendingMovies} />}
       <section className="movies">
-        <h2>Popular</h2>
-        {isLoading && <Spinner />}
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+        {movieList.length ? <h2>Movies</h2> : <h2>No movies found. Try a different search.</h2>}
         {movieList.length && <MoviesList movieList={movieList} />}
       </section>
-      <Pagination
-        onNextPageClick={handleNextButtonClick}
-        onPrevPageClick={handlePrevButtonClick}
-        onPageClick={handlePageClick}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
+      {movieList.length && (
+        <Pagination
+          onNextPageClick={handleNextButtonClick}
+          onPrevPageClick={handlePrevButtonClick}
+          onPageClick={handlePageClick}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+      )}
     </div>
   );
 };

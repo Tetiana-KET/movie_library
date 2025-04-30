@@ -1,4 +1,6 @@
-export const HeroSection = () => {
+import React from 'react';
+
+const HeroSection = () => {
   return (
     <section className="hero">
       <img width={512} height={327} src="/hero-img.webp" alt="Hero Banner" loading="eager" />
@@ -8,3 +10,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+export default React.memo(HeroSection);

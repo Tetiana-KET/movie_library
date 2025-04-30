@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowIcon } from './ui/ArrowIcon';
 import { getPageNumbers } from '@/utils/getPageNumbers';
 
@@ -10,7 +9,7 @@ type PaginationProps = {
   totalPages: number;
 };
 
-const Pagination = (props: PaginationProps) => {
+export const Pagination = (props: PaginationProps) => {
   const { onNextPageClick, onPrevPageClick, onPageClick, currentPage, totalPages } = props;
 
   return (
@@ -48,5 +47,3 @@ const Pagination = (props: PaginationProps) => {
     </div>
   );
 };
-
-export default React.memo(Pagination);
