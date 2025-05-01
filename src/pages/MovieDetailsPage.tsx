@@ -7,6 +7,8 @@ import { fetchMovieTrailer } from '@/services/fetchMovieTrailer';
 import { getTrailer } from '@/utils/getTrailer';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import '@/styles/details.css';
+import { MovieInfo } from '@/components/details/MovieInfo';
 
 export const MovieDetailsPage = () => {
   const params = useParams();
@@ -27,6 +29,21 @@ export const MovieDetailsPage = () => {
       }
     : null;
 
+  const movieInfoProps = movieDetails
+    ? {
+        genres: movieDetails.genres,
+        overview: movieDetails.overview,
+        release_date: movieDetails.release_date,
+        countries: movieDetails.production_countries,
+        status: movieDetails.status,
+        language: movieDetails.spoken_languages,
+        budget: movieDetails.budget,
+        revenue: movieDetails.revenue,
+        tagline: movieDetails.tagline,
+        production_Companies: movieDetails.production_companies,
+      }
+    : null;
+
   useEffect(() => {
     if (!movieId) return;
 
@@ -41,11 +58,11 @@ export const MovieDetailsPage = () => {
         console.error(err);
       }
     };
-    fetchData();
+    void fetchData();
   }, [movieId]);
 
   return (
-    <div className="max-w-[1620px] mx-auto text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details ">
+    <div className="details-wrap">
       {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
       <TrailerSection
         youtubeKey={trailer?.key}
@@ -53,6 +70,7 @@ export const MovieDetailsPage = () => {
         backdropPath={movieDetails?.backdrop_path}
         posterPath={movieDetails?.poster_path}
       />
+      {movieInfoProps && <MovieInfo {...movieInfoProps} />}
     </div>
   );
 };
