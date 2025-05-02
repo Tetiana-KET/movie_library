@@ -2,13 +2,14 @@ import { StarIcon } from '../ui/StarIcon';
 import { formatVoteCount } from '@/utils/formatVoteCount';
 import { getAgeRating } from '@/utils/getAgeRating';
 import { formatRuntime } from '@/utils/formatRuntime';
+import { Genre } from '@/models/MovieDetails';
 
 interface DetailsHeaderProps {
   title: string;
   vote_average: number;
   vote_count: number;
   release_date: string;
-  genres: { id: number; name: string }[];
+  genres: Genre[];
   runtime: number;
   adult: boolean;
 }
@@ -18,8 +19,8 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
 
   return (
     <header className="mb-5">
-      <div className="flex justify-between mb-3 gap-3 flex-wrap">
-        <h1 className="m-0">{title}</h1>
+      <div className="title-wrap">
+        <h1>{title}</h1>
         <div className="flex gap-1 items-center button">
           <StarIcon size={30} />
           <p className="text-sm xs:text-2xl text-white">

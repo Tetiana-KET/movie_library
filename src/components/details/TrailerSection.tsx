@@ -1,3 +1,4 @@
+/* eslint-disable react-dom/no-unsafe-iframe-sandbox */
 import { getImagePath } from '@/utils/getImagePath';
 
 interface TrailerProps {
@@ -20,6 +21,7 @@ export const TrailerSection = ({ youtubeKey, trailerName, backdropPath, posterPa
             src={`https://www.youtube.com/embed/${youtubeKey}`}
             allowFullScreen
             title={trailerName}
+            sandbox="allow-scripts allow-same-origin allow-presentation"
           />
         ) : (
           <div className="relative">

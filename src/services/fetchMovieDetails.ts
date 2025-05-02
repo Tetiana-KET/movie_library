@@ -10,7 +10,7 @@ export const fetchMovieDetails = async (id: string): Promise<MovieDetails> => {
     throw new Error(FETCHING_ERROR_MSG);
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as unknown as MovieDetails;
 
   return data;
 };

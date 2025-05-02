@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import url('tailwindcss');
 
 @theme {
   --color-primary: #030014;
@@ -8,13 +8,21 @@
   --color-accent: #ab8bff;
   --color-gray-100: #9ca4ab;
   --color-dark-100: #0f0d23;
-  --font-dm-sans: DM Sans, sans-serif;
+  --font-dm-sans: dm sans, sans-serif;
   --breakpoint-xs: 480px;
-  --shadow-details: 0px 0px 60px 10px #eecefb5c;
+  --shadow-details: 0 0 60px 10px #eecefb5c;
 }
 
 @layer components {
-    .details-wrap {
-        @apply max-w-[1620px] mx-auto my-10 text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details;
+  .details-wrap {
+    @apply max-w-[1620px] mx-auto my-10 text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details;
+
+    h1 {
+      @apply mx-0 text-5xl font-bold leading-tight text-white sm:text-[56px] sm:leading-[64px];
     }
+
+    & .title-wrap {
+      @apply flex justify-between mb-3 gap-3 flex-wrap;
+    }
+  }
 }

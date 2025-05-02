@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 
 export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | ''>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
   const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([]);
@@ -32,8 +32,12 @@ export const MainPage = () => {
           GENRES_MAP[genre.id] = genre.name;
         });
       })
-      .catch((e: Error) => {
-        console.log(e.message);
+      .catch((e: unknown) => {
+        if (e instanceof Error) {
+          console.log(e.message);
+        } else {
+          console.log('Unknown error', e);
+        }
       });
   }, []);
 
@@ -49,8 +53,12 @@ export const MainPage = () => {
 
         setTrendingMovies(mappedTrendingMovies);
       })
-      .catch((e: Error) => {
-        console.log(e.message);
+      .catch((e: unknown) => {
+        if (e instanceof Error) {
+          console.log(e.message);
+        } else {
+          console.log('Unknown error', e);
+        }
       });
   }, []);
 
@@ -63,8 +71,13 @@ export const MainPage = () => {
         setMovieList(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
       })
-      .catch((e: Error) => {
-        setErrorMessage(e.message);
+      .catch((e: unknown) => {
+        if (e instanceof Error) {
+          setErrorMessage(e.message);
+        } else {
+          setErrorMessage('Unknown error');
+        }
+
         setMovieList([]);
       })
       .finally(() => {
@@ -90,7 +103,7 @@ export const MainPage = () => {
 
       <HeroSection />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      {trendingMovies && <TrendingMovies trendingMovies={trendingMovies} />}
+      {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <section className="movies">
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
         {movieList.length ? <h2>Movies</h2> : <h2>No movies found. Try a different search.</h2>}

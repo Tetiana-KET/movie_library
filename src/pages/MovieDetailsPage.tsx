@@ -1,5 +1,6 @@
 import { DetailsHeader } from '@/components/details/DetailsHeader';
 import { TrailerSection } from '@/components/details/TrailerSection';
+import { MovieInfo } from '@/components/details/MovieInfo';
 import { MovieDetails } from '@/models/MovieDetails';
 import { VideoInterface } from '@/models/VideoResponse';
 import { fetchMovieDetails } from '@/services/fetchMovieDetails';
@@ -8,11 +9,10 @@ import { getTrailer } from '@/utils/getTrailer';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import '@/styles/details.css';
-import { MovieInfo } from '@/components/details/MovieInfo';
 
 export const MovieDetailsPage = () => {
   const params = useParams();
-  const movieId = params.id!;
+  const movieId = params.id;
 
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [trailer, setTrailer] = useState<VideoInterface | null>(null);

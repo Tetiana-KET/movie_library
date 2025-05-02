@@ -1,32 +1,18 @@
+import { Companies, Countries, Genre, Language } from '@/models/MovieDetails';
 import { formatInfoTitle } from '@/utils/formatInfoTitle';
 import { formatInfoValue } from '@/utils/formatInfoValue';
 
 export interface MovieInfoProps {
-  genres: {
-    id: number;
-    name: string;
-  }[];
+  genres: Genre[];
   overview: string;
   release_date: string;
-  countries: {
-    iso_3166_1: string;
-    name: string;
-  }[];
+  countries: Countries[];
   status: string;
-  language: {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
-  }[];
+  language: Language[];
   budget: number;
   revenue: number;
   tagline: string;
-  production_Companies: {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
-  }[];
+  production_Companies: Companies[];
 }
 
 export const MovieInfo = (props: MovieInfoProps) => {

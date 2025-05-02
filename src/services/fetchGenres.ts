@@ -1,5 +1,5 @@
 import { getApiOptions, BASE_URL } from '@/consts/api';
-import { Genre } from '@/models/Genre';
+import { Genre } from '@/models/MovieDetails';
 
 interface GenresResponse {
   genres: Genre[];
@@ -13,5 +13,7 @@ export const fetchGenres = async (): Promise<GenresResponse> => {
     throw new Error('Failed to fetch genres');
   }
 
-  return await response.json();
+  const data = (await response.json()) as unknown as GenresResponse;
+
+  return data;
 };

@@ -1,6 +1,5 @@
 import { MovieInterface } from '@/models/MovieInterface';
 import { StarIcon } from './ui/StarIcon';
-import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { Link } from 'react-router-dom';
 import { getGenreList } from '@/utils/getGenreList';
 
@@ -15,7 +14,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
 
   return (
     <li>
-      <Link to={`/movie/${movie.id}`}>
+      <Link to={`/movie/${String(movie.id)}`}>
         <figure className="movie-card">
           <div className="ratio-box">
             <img
