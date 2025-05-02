@@ -20,9 +20,9 @@ export const MovieDetailsPage = () => {
   const detailsHeaderProps = movieDetails
     ? {
         title: movieDetails.title,
-        vote_average: movieDetails.vote_average,
-        vote_count: movieDetails.vote_count,
-        release_date: movieDetails.release_date,
+        voteAverage: movieDetails.vote_average,
+        voteCount: movieDetails.vote_count,
+        releaseDate: movieDetails.release_date,
         genres: movieDetails.genres,
         runtime: movieDetails.runtime,
         adult: movieDetails.adult,
@@ -33,14 +33,14 @@ export const MovieDetailsPage = () => {
     ? {
         genres: movieDetails.genres,
         overview: movieDetails.overview,
-        release_date: movieDetails.release_date,
+        releaseDate: movieDetails.release_date,
         countries: movieDetails.production_countries,
         status: movieDetails.status,
         language: movieDetails.spoken_languages,
         budget: movieDetails.budget,
         revenue: movieDetails.revenue,
         tagline: movieDetails.tagline,
-        production_Companies: movieDetails.production_companies,
+        productionCompanies: movieDetails.production_companies,
       }
     : null;
 

@@ -10,11 +10,11 @@ interface TrailerProps {
 
 export const TrailerSection = ({ youtubeKey, trailerName, backdropPath, posterPath }: TrailerProps) => {
   return (
-    <div className="flex gap-6 mb-6">
+    <div className="flex flex-col sm:flex-row gap-6 mb-10">
       <div className="rounded-2xl overflow-hidden basis-1/3 aspect-square">
         <img className="w-full h-full object-cover" src={getImagePath(posterPath)} alt="poster for movie" />
       </div>
-      <div className="w-full h-full rounded-2xl overflow-hidden basis-2/3 aspect-video">
+      <div className="w-full rounded-2xl overflow-hidden basis-2/3 aspect-video">
         {youtubeKey ? (
           <iframe
             className="w-full h-full"
