@@ -1,7 +1,7 @@
 import { MovieInterface } from '@/models/MovieInterface';
 import { StarIcon } from './ui/StarIcon';
-import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { Link } from 'react-router-dom';
+import { getGenreList } from '@/utils/getGenreList';
 
 interface MovieCard {
   movie: MovieInterface;
@@ -10,14 +10,15 @@ interface MovieCard {
 export const MovieCard = ({ movie }: MovieCard) => {
   const { genre_ids, poster_path, release_date, title, vote_average } = movie;
 
-  const genreList = genre_ids.map((id) => GENRES_MAP[id]).filter(Boolean);
+  const genreList = getGenreList(genre_ids);
 
   return (
     <li>
-      <Link to={`/movie/${movie.id}`}>
-        <figure className="movie-card">
+      <Link to={`/movie/${String(movie.id)}`}>
+        <figure className="movie-card group">
           <div className="ratio-box">
             <img
+              className="transition-transform duration-300 ease-in-out group-hover:scale-105"
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt={`a poster for movie: ${title}`}
               style={{ objectPosition: 'center 35%' }}

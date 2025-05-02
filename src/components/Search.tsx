@@ -15,7 +15,9 @@ const Search = ({ searchQuery, setSearchQuery }: SearchProps) => {
           type="text"
           placeholder="Search through hundreds of movies online"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
           className="placeholder-ellipsis w-full overflow-hidden text-ellipsis whitespace-nowrap"
         />
       </div>

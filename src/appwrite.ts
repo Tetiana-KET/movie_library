@@ -1,9 +1,9 @@
 import { Client, Databases, ID, Query } from 'appwrite';
 import { MovieInterface } from './models/MovieInterface';
 
-const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID;
-const DB_ID = import.meta.env.VITE_APPWRITE_DB_ID;
-const COLLECTION_ID = import.meta.env.VITE_APPWRITE_METRICS_COLLECTOIN_ID;
+const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID as string;
+const DB_ID = import.meta.env.VITE_APPWRITE_DB_ID as string;
+const COLLECTION_ID = import.meta.env.VITE_APPWRITE_METRICS_COLLECTOIN_ID as string;
 
 const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject(PROJECT_ID);
 
@@ -16,7 +16,7 @@ export const updateSearchCount = async (searchTerm: string, movie: MovieInterfac
     const doc = result.documents[0];
 
     await database.updateDocument(DB_ID, COLLECTION_ID, doc.$id, {
-      count: doc.count + 1,
+      count: (doc.count as number) + 1,
     });
   } else {
     await database.createDocument(DB_ID, COLLECTION_ID, ID.unique(), {

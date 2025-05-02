@@ -1,13 +1,13 @@
 import { ArrowIcon } from './ui/ArrowIcon';
 import { getPageNumbers } from '@/utils/getPageNumbers';
 
-type PaginationProps = {
+interface PaginationProps {
   onNextPageClick: () => void;
   onPrevPageClick: () => void;
   onPageClick: (page: number) => void;
   currentPage: number;
   totalPages: number;
-};
+}
 
 export const Pagination = (props: PaginationProps) => {
   const { onNextPageClick, onPrevPageClick, onPageClick, currentPage, totalPages } = props;
@@ -19,17 +19,20 @@ export const Pagination = (props: PaginationProps) => {
       </button>
 
       <div className="page-numbers_wrap">
-        {getPageNumbers(currentPage, totalPages).map((page, index) =>
+        {getPageNumbers(currentPage, totalPages).map((page) =>
           typeof page === 'number' ? (
             <button
+              type="button"
               key={page}
-              onClick={() => onPageClick(page)}
+              onClick={() => {
+                onPageClick(page);
+              }}
               className={`pagination_button ${page === currentPage ? 'active' : ''}`}
             >
               {page}
             </button>
           ) : (
-            <span key={`dots_${index}`} className="pagination_button pagination_ellipsis">
+            <span key={`dots_${String(Math.random())}`} className="pagination_button pagination_ellipsis">
               {page}
             </span>
           ),

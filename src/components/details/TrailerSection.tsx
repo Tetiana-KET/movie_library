@@ -1,3 +1,4 @@
+/* eslint-disable react-dom/no-unsafe-iframe-sandbox */
 import { getImagePath } from '@/utils/getImagePath';
 
 interface TrailerProps {
@@ -9,17 +10,18 @@ interface TrailerProps {
 
 export const TrailerSection = ({ youtubeKey, trailerName, backdropPath, posterPath }: TrailerProps) => {
   return (
-    <div className="flex gap-6 mb-6">
+    <div className="flex flex-col sm:flex-row gap-6 mb-10">
       <div className="rounded-2xl overflow-hidden basis-1/3 aspect-square">
         <img className="w-full h-full object-cover" src={getImagePath(posterPath)} alt="poster for movie" />
       </div>
-      <div className="w-full h-full rounded-2xl overflow-hidden basis-2/3 aspect-video">
+      <div className="w-full rounded-2xl overflow-hidden basis-2/3 aspect-video">
         {youtubeKey ? (
           <iframe
             className="w-full h-full"
-            src={`https://www.youtube.com/embed/${youtubeKey}`}
+            src={`https://www.youtube.com/embed/${youtubeKey}?autoplay=0&mute=1`}
             allowFullScreen
             title={trailerName}
+            sandbox="allow-scripts allow-same-origin allow-presentation"
           />
         ) : (
           <div className="relative">

@@ -10,7 +10,7 @@ export const fetchMovieTrailer = async (id: string): Promise<VideoResponse> => {
     throw new Error(FETCHING_ERROR_MSG);
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as unknown as VideoResponse;
 
   return data;
 };

@@ -1,6 +1,6 @@
-type StarIconProps = {
+interface StarIconProps {
   size?: number;
-};
+}
 
 export const StarIcon = ({ size = 19 }: StarIconProps) => {
   return (

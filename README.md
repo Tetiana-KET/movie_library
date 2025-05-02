@@ -49,8 +49,8 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [] **Favorites Management**
   Add and remove movies from your personal favorites list for quick access to your preferred titles.
 
-- [] **Details Page with Trailers**
-  Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
+- [x] **Details Page with Trailers**
+      Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
 
 - [] **Advanced Filtering**
   Filter movies by release year, genre, or even exclude unwanted genres (e.g., include "comedy" but exclude "thriller").

@@ -1,5 +1,6 @@
 import { DetailsHeader } from '@/components/details/DetailsHeader';
 import { TrailerSection } from '@/components/details/TrailerSection';
+import { MovieInfo } from '@/components/details/MovieInfo';
 import { MovieDetails } from '@/models/MovieDetails';
 import { VideoInterface } from '@/models/VideoResponse';
 import { fetchMovieDetails } from '@/services/fetchMovieDetails';
@@ -7,10 +8,11 @@ import { fetchMovieTrailer } from '@/services/fetchMovieTrailer';
 import { getTrailer } from '@/utils/getTrailer';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import '@/styles/details.css';
 
 export const MovieDetailsPage = () => {
   const params = useParams();
-  const movieId = params.id!;
+  const movieId = params.id;
 
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [trailer, setTrailer] = useState<VideoInterface | null>(null);
@@ -18,12 +20,27 @@ export const MovieDetailsPage = () => {
   const detailsHeaderProps = movieDetails
     ? {
         title: movieDetails.title,
-        vote_average: movieDetails.vote_average,
-        vote_count: movieDetails.vote_count,
-        release_date: movieDetails.release_date,
+        voteAverage: movieDetails.vote_average,
+        voteCount: movieDetails.vote_count,
+        releaseDate: movieDetails.release_date,
         genres: movieDetails.genres,
         runtime: movieDetails.runtime,
         adult: movieDetails.adult,
+      }
+    : null;
+
+  const movieInfoProps = movieDetails
+    ? {
+        genres: movieDetails.genres,
+        overview: movieDetails.overview,
+        releaseDate: movieDetails.release_date,
+        countries: movieDetails.production_countries,
+        status: movieDetails.status,
+        language: movieDetails.spoken_languages,
+        budget: movieDetails.budget,
+        revenue: movieDetails.revenue,
+        tagline: movieDetails.tagline,
+        productionCompanies: movieDetails.production_companies,
       }
     : null;
 
@@ -41,11 +58,11 @@ export const MovieDetailsPage = () => {
         console.error(err);
       }
     };
-    fetchData();
+    void fetchData();
   }, [movieId]);
 
   return (
-    <div className="max-w-[1620px] mx-auto text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details ">
+    <div className="details-wrap">
       {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
       <TrailerSection
         youtubeKey={trailer?.key}
@@ -53,6 +70,7 @@ export const MovieDetailsPage = () => {
         backdropPath={movieDetails?.backdrop_path}
         posterPath={movieDetails?.poster_path}
       />
+      {movieInfoProps && <MovieInfo {...movieInfoProps} />}
     </div>
   );
 };
