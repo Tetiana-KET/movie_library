@@ -18,7 +18,7 @@ export const TrailerSection = ({ youtubeKey, trailerName, backdropPath, posterPa
         {youtubeKey ? (
           <iframe
             className="w-full h-full"
-            src={`https://www.youtube.com/embed/${youtubeKey}`}
+            src={`https://www.youtube.com/embed/${youtubeKey}?autoplay=0&mute=1`}
             allowFullScreen
             title={trailerName}
             sandbox="allow-scripts allow-same-origin allow-presentation"

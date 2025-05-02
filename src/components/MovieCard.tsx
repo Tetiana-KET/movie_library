@@ -15,9 +15,10 @@ export const MovieCard = ({ movie }: MovieCard) => {
   return (
     <li>
       <Link to={`/movie/${String(movie.id)}`}>
-        <figure className="movie-card">
+        <figure className="movie-card group">
           <div className="ratio-box">
             <img
+              className="transition-transform duration-300 ease-in-out group-hover:scale-105"
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt={`a poster for movie: ${title}`}
               style={{ objectPosition: 'center 35%' }}
