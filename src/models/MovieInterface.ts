@@ -14,3 +14,7 @@ export interface MovieInterface {
   vote_average: number;
   vote_count: number;
 }
+
+export interface TrendingInterface extends MovieInterface {
+  media_type: string;
+}

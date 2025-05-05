@@ -1,5 +1,3 @@
-import { getTrendingMovies } from '@/appwrite';
-
 import HeroSection from '@/components/HeroSection';
 import TrendingMovies from '@/components/TrendingMovies';
 import Search from '@/components/Search';
@@ -8,10 +6,10 @@ import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { useDebounce } from '@/hooks/useDebounce';
-import { MovieInterface } from '@/models/MovieInterface';
-import { TrendingMovie } from '@/models/TrendingMovie';
+import { MovieInterface, TrendingInterface } from '@/models/MovieInterface';
 import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
+import { fetchTrendingMovies } from '@/services/fetchTrendingMovies';
 import { useEffect, useState } from 'react';
 
 export const MainPage = () => {
@@ -19,7 +17,7 @@ export const MainPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
-  const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<TrendingInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -42,16 +40,9 @@ export const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    getTrendingMovies()
+    fetchTrendingMovies()
       .then((data) => {
-        const mappedTrendingMovies = data.documents.map((doc) => ({
-          searchTerm: doc.searchTerm as string,
-          count: doc.count as number,
-          poster_url: doc.poster_url as string,
-          movie_id: doc.movie_id as number,
-        }));
-
-        setTrendingMovies(mappedTrendingMovies);
+        setTrendingMovies(data.results);
       })
       .catch((e: unknown) => {
         if (e instanceof Error) {

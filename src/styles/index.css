@@ -16,6 +16,7 @@
   --background-image-hero-pattern: url('/bg.webp');
   --shadow-footer: 0 0 10px 2px var(--color-light-100);
   --shadow-details: 0 0 60px 10px #eecefb5c;
+  --shadow-trending: 0 0 15px 1px #eecefb5c;
 }
 
 @layer base {
@@ -92,23 +93,39 @@
     @apply mb-21;
 
     & h2 {
-      @apply mb-[20px];
+      @apply mb-[25px];
+    }
+
+    .carouse-container {
+      @apply overflow-hidden px-3;
     }
 
     & ul {
-      @apply grid grid-cols-1 min-[400px]:grid-cols-2 gap-1.5 sm:grid-cols-3 lg:grid-cols-6;
+      @apply flex gap-1;
     }
 
     & ul li {
-      @apply flex flex-row items-center justify-center md:justify-start;
+      @apply relative shrink-0 transition-transform duration-300 hover:scale-105;
+    }
+
+    & ul li:hover div {
+      @apply shadow-trending;
+    }
+
+    & ul div {
+      @apply rounded-lg overflow-hidden duration-300;
+    }
+
+    & ul li a {
+      @apply block w-[190px] h-[265px] p-5;
     }
 
     & ul li p {
-      @apply fancy-text mt-[12px] text-nowrap leading-none w-[87px] text-right;
+      @apply fancy-text mt-[12px] -mr-6 text-nowrap text-left leading-none w-[87px] absolute z-1 bottom-[10px] left-[-5px];
     }
 
     & ul li img {
-      @apply w-[107px] h-[143px] rounded-lg object-cover -ml-1.5;
+      @apply object-cover;
     }
   }
 
@@ -233,10 +250,11 @@
 }
 
 @utility fancy-text {
-  -webkit-text-stroke: 1px rgb(206 206 251 / 50%);
   font-size: 140px;
   font-weight: bold;
   font-family: 'DM Sans';
+  color: #030014;
+  text-shadow: 0px 0px 5px #ccbafb;
 }
 
 @utility hide-scrollbar {
