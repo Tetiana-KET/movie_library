@@ -96,36 +96,52 @@
       @apply mb-[25px];
     }
 
-    .carouse-container {
-      @apply overflow-hidden px-3;
+    .carousel_container {
+      @apply flex overflow-hidden;
+
+      .track-wrap {
+        @apply grow overflow-hidden;
+      }
+
+      .carousel_button-wrap {
+        @apply self-center flex items-center justify-center size-14 flex-none  h-full bg-primary;
+      }
+
+      button {
+        @apply w-[20px] h-[120px] flex items-center justify-center bg-dark-100 text-light-100 rounded-lg shadow-inner text-center shadow-light-100/10 cursor-pointer transition-colors duration-500 hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
+      }
+
+      .carousel_button-wrap.next {
+        @apply rotate-180;
+      }
     }
 
     & ul {
-      @apply flex gap-1;
+      @apply flex;
     }
 
     & ul li {
       @apply relative shrink-0 transition-transform duration-300 hover:scale-105;
     }
 
+    & ul li div {
+      @apply h-full rounded-lg overflow-hidden duration-300;
+    }
+
     & ul li:hover div {
       @apply shadow-trending;
     }
 
-    & ul div {
-      @apply rounded-lg overflow-hidden duration-300;
-    }
-
     & ul li a {
-      @apply block w-[190px] h-[265px] p-5;
+      @apply block w-[190px] h-[265px] p-4;
     }
 
     & ul li p {
-      @apply fancy-text mt-[12px] -mr-6 text-nowrap text-left leading-none w-[87px] absolute z-1 bottom-[10px] left-[-5px];
+      @apply fancy-text pl-4 text-nowrap text-left leading-none absolute z-1 bottom-[10px] left-[-12px];
     }
 
     & ul li img {
-      @apply object-cover;
+      @apply block w-full h-full object-cover;
     }
   }
 
@@ -250,7 +266,7 @@
 }
 
 @utility fancy-text {
-  font-size: 140px;
+  font-size: 120px;
   font-weight: bold;
   font-family: 'DM Sans';
   color: #030014;
