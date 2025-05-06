@@ -68,8 +68,16 @@
     @apply px-5 max-w-[1620px] mx-auto flex flex-col relative z-10;
   }
 
-  .hero img {
-    @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
+  .hero_posters-wrap:nth-child(1) {
+    @apply -rotate-5 z-1 mr-[-6px];
+  }
+
+  .hero_posters-wrap:nth-child(2) {
+    @apply rotate-0 z-2 scale-105 -translate-y-4;
+  }
+
+  .hero_posters-wrap:nth-child(3) {
+    @apply rotate-5 z-1 ml-[-6px];
   }
 
   header img {
@@ -146,7 +154,7 @@
   }
 
   .search {
-    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[100px] max-w-[640px] mx-auto;
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[80px] max-w-[640px] mx-auto;
 
     & div {
       @apply relative flex items-center;

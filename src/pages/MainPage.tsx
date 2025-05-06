@@ -11,6 +11,7 @@ import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
 import { fetchTrendingMovies } from '@/services/fetchTrendingMovies';
 import { useEffect, useState } from 'react';
+import { getRandomIndexes } from '@/utils/getRandomIndexes';
 
 export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,8 +21,8 @@ export const MainPage = () => {
   const [trendingMovies, setTrendingMovies] = useState<TrendingInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-
   const debouncedQuery = useDebounce(searchQuery, 700);
+  const [heroPostersPaths, setHeroPostersPaths] = useState<string[]>([]);
 
   useEffect(() => {
     fetchGenres()
@@ -43,6 +44,9 @@ export const MainPage = () => {
     fetchTrendingMovies()
       .then((data) => {
         setTrendingMovies(data.results);
+        const randomIndexes = getRandomIndexes(data.results.length);
+        const selectedPaths = randomIndexes.map((i) => data.results[i].poster_path);
+        setHeroPostersPaths(selectedPaths);
       })
       .catch((e: unknown) => {
         if (e instanceof Error) {
@@ -92,7 +96,7 @@ export const MainPage = () => {
     <div className="wrapper">
       {isLoading && <Spinner />}
 
-      <HeroSection />
+      <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <section className="movies">
