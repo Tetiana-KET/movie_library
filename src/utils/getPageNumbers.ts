@@ -1,5 +1,4 @@
-import { ADJACENT_COUNT } from '@/consts/ADJACENT_COUNT';
-import { PAGES_TO_SHOW } from '@/consts/PAGES_TO_SHOW';
+import { ADJACENT_COUNT, PAGES_TO_SHOW } from '@/consts/pagination';
 
 export const getPageNumbers = (currentPage: number, totalPages: number) => {
   const pages: (string | number)[] = [];

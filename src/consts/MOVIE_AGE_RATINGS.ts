@@ -6,7 +6,7 @@ export interface AgeRatingInfo {
   icon: string;
 }
 
-export const AGE_RATINGS: Record<AgeRatingKey, AgeRatingInfo> = {
+export const MOVIE_AGE_RATINGS: Record<AgeRatingKey, AgeRatingInfo> = {
   '18+': {
     label: '18+',
     description: 'Restricted to adults only',
