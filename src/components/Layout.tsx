@@ -1,7 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
+import { ButtonWithArrow } from './ui/ButtonWithArrow';
+import { scrollToTop } from '@/utils/scrollToTop';
+import { useShowTopButton } from '@/hooks/useShowTopButton';
 
 export const Layout = () => {
+  const { showScrollButton } = useShowTopButton();
   return (
     <>
       <div className="pattern" />
@@ -13,6 +17,10 @@ export const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ButtonWithArrow
+        onClick={scrollToTop}
+        className={`button button-top ${showScrollButton ? 'button-top__visible' : ''}`}
+      />
     </>
   );
 };
