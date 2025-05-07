@@ -14,9 +14,10 @@ import { useEffect, useState } from 'react';
 import { getRandomIndexes } from '@/utils/getRandomIndexes';
 
 export const MainPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [searchQuery, setSearchQuery] = useState('');
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
   const [trendingMovies, setTrendingMovies] = useState<TrendingInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);

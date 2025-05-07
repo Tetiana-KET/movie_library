@@ -1,6 +1,7 @@
 import { DetailsHeader } from '@/components/details/DetailsHeader';
 import { TrailerSection } from '@/components/details/TrailerSection';
 import { MovieInfo } from '@/components/details/MovieInfo';
+import { Spinner } from '@/components/ui/Spinner';
 import { MovieDetails } from '@/models/MovieDetails';
 import { VideoInterface } from '@/models/VideoResponse';
 import { fetchMovieDetails } from '@/services/fetchMovieDetails';
@@ -13,6 +14,9 @@ import '@/styles/details.css';
 export const MovieDetailsPage = () => {
   const params = useParams();
   const movieId = params.id;
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [trailer, setTrailer] = useState<VideoInterface | null>(null);
@@ -48,14 +52,21 @@ export const MovieDetailsPage = () => {
     if (!movieId) return;
 
     const fetchData = async () => {
+      setIsLoading(true);
+      setErrorMessage('');
       try {
         const [detailsRes, trailerRes] = await Promise.all([fetchMovieDetails(movieId), fetchMovieTrailer(movieId)]);
         setMovieDetails(detailsRes);
 
         const bestTrailer = getTrailer(trailerRes.results);
         setTrailer(bestTrailer);
-      } catch (err) {
-        console.error(err);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setErrorMessage(err.message);
+        }
+        setErrorMessage('Unknown error');
+      } finally {
+        setIsLoading(false);
       }
     };
     void fetchData();
@@ -63,6 +74,8 @@ export const MovieDetailsPage = () => {
 
   return (
     <div className="details-wrap">
+      {isLoading && <Spinner />}
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
       <TrailerSection
         youtubeKey={trailer?.key}
