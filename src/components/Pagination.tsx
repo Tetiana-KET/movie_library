@@ -1,5 +1,5 @@
-import { ArrowIcon } from './ui/ArrowIcon';
 import { getPageNumbers } from '@/utils/getPageNumbers';
+import { ButtonWithArrow } from './ui/ButtonWithArrow';
 
 interface PaginationProps {
   onNextPageClick: () => void;
@@ -14,10 +14,7 @@ export const Pagination = (props: PaginationProps) => {
 
   return (
     <div className="pagination">
-      <button className="pagination_button prev" type="button" onClick={onPrevPageClick} disabled={currentPage === 1}>
-        <ArrowIcon />
-      </button>
-
+      <ButtonWithArrow onClick={onPrevPageClick} disabled={currentPage === 1} className="pagination_button prev" />
       <div className="page-numbers_wrap">
         {getPageNumbers(currentPage, totalPages).map((page) =>
           typeof page === 'number' ? (
@@ -38,15 +35,11 @@ export const Pagination = (props: PaginationProps) => {
           ),
         )}
       </div>
-
-      <button
-        className="pagination_button next"
-        type="button"
+      <ButtonWithArrow
         onClick={onNextPageClick}
         disabled={currentPage === totalPages}
-      >
-        <ArrowIcon />
-      </button>
+        className="pagination_button next"
+      />
     </div>
   );
 };
