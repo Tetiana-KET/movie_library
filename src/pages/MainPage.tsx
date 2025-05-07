@@ -4,11 +4,12 @@ import Search from '@/components/Search';
 import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTrendingLoader } from '@/hooks/useTrendingLoader';
 import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMoviesLoader } from '@/hooks/useMoviesLoader';
 import { MoviesSection } from '@/components/MoviesSection';
+import { scrollToSection } from '@/utils/scrollToSection';
 
 export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,18 +18,23 @@ export const MainPage = () => {
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
   const { movieList, totalPages, errorMessage, isLoading } = useMoviesLoader(debouncedQuery, currentPage);
 
+  const moviesSectionRef = useRef<HTMLDivElement | null>(null);
+
   useGenresLoader();
 
   const handleNextButtonClick = () => {
     setCurrentPage((prev) => prev + 1);
+    scrollToSection(moviesSectionRef);
   };
 
   const handlePrevButtonClick = () => {
     setCurrentPage((prev) => prev - 1);
+    scrollToSection(moviesSectionRef);
   };
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
+    scrollToSection(moviesSectionRef);
   };
 
   return (
@@ -37,7 +43,7 @@ export const MainPage = () => {
       <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
-      <MoviesSection movieList={movieList} errorMessage={errorMessage} />
+      <MoviesSection movieList={movieList} errorMessage={errorMessage} ref={moviesSectionRef} />
       {movieList.length && (
         <Pagination
           onNextPageClick={handleNextButtonClick}
