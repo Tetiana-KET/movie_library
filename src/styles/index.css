@@ -16,6 +16,7 @@
   --background-image-hero-pattern: url('/bg.webp');
   --shadow-footer: 0 0 10px 2px var(--color-light-100);
   --shadow-details: 0 0 60px 10px #eecefb5c;
+  --shadow-trending: 0 0 15px 1px #eecefb5c;
 }
 
 @layer base {
@@ -67,8 +68,16 @@
     @apply px-5 max-w-[1620px] mx-auto flex flex-col relative z-10;
   }
 
-  .hero img {
-    @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
+  .hero_posters-wrap:nth-child(1) {
+    @apply -rotate-5 z-1 mr-[-6px];
+  }
+
+  .hero_posters-wrap:nth-child(2) {
+    @apply rotate-0 z-2 scale-105 -translate-y-4;
+  }
+
+  .hero_posters-wrap:nth-child(3) {
+    @apply rotate-5 z-1 ml-[-6px];
   }
 
   header img {
@@ -92,28 +101,60 @@
     @apply mb-21;
 
     & h2 {
-      @apply mb-[20px];
+      @apply mb-[25px];
+    }
+
+    .carousel_container {
+      @apply flex overflow-hidden;
+
+      .track-wrap {
+        @apply grow overflow-hidden;
+      }
+
+      .carousel_button-wrap {
+        @apply self-center flex items-center justify-center size-14 flex-none  h-full bg-primary;
+      }
+
+      button {
+        @apply w-[20px] h-[120px] flex items-center justify-center bg-dark-100 text-light-100 rounded-lg shadow-inner text-center shadow-light-100/10 cursor-pointer transition-colors duration-500 hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
+      }
+
+      .carousel_button-wrap.next {
+        @apply rotate-180;
+      }
     }
 
     & ul {
-      @apply grid grid-cols-1 min-[400px]:grid-cols-2 gap-1.5 sm:grid-cols-3 lg:grid-cols-6;
+      @apply flex;
     }
 
     & ul li {
-      @apply flex flex-row items-center justify-center md:justify-start;
+      @apply relative shrink-0 transition-transform duration-300 hover:scale-105;
+    }
+
+    & ul li div {
+      @apply h-full rounded-lg overflow-hidden duration-300;
+    }
+
+    & ul li:hover div {
+      @apply shadow-trending;
+    }
+
+    & ul li a {
+      @apply block w-[190px] h-[265px] p-4;
     }
 
     & ul li p {
-      @apply fancy-text mt-[12px] text-nowrap leading-none w-[87px] text-right;
+      @apply fancy-text pl-4 text-nowrap text-left leading-none absolute z-1 bottom-[10px] left-[-12px];
     }
 
     & ul li img {
-      @apply w-[107px] h-[143px] rounded-lg object-cover -ml-1.5;
+      @apply block w-full h-full object-cover;
     }
   }
 
   .search {
-    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[100px] max-w-[640px] mx-auto;
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-7 mb-[80px] max-w-[640px] mx-auto;
 
     & div {
       @apply relative flex items-center;
@@ -233,10 +274,11 @@
 }
 
 @utility fancy-text {
-  -webkit-text-stroke: 1px rgb(206 206 251 / 50%);
-  font-size: 140px;
+  font-size: 120px;
   font-weight: bold;
   font-family: 'DM Sans';
+  color: #030014;
+  text-shadow: 0px 0px 5px #ccbafb;
 }
 
 @utility hide-scrollbar {

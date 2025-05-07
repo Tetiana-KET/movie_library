@@ -1,5 +1,3 @@
-import { getTrendingMovies } from '@/appwrite';
-
 import HeroSection from '@/components/HeroSection';
 import TrendingMovies from '@/components/TrendingMovies';
 import Search from '@/components/Search';
@@ -8,22 +6,24 @@ import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { GENRES_MAP } from '@/consts/GENRES_MAP';
 import { useDebounce } from '@/hooks/useDebounce';
-import { MovieInterface } from '@/models/MovieInterface';
-import { TrendingMovie } from '@/models/TrendingMovie';
+import { MovieInterface, TrendingInterface } from '@/models/MovieInterface';
 import { fetchGenres } from '@/services/fetchGenres';
 import { fetchMovies } from '@/services/fetchMovies';
+import { fetchTrendingMovies } from '@/services/fetchTrendingMovies';
 import { useEffect, useState } from 'react';
+import { getRandomIndexes } from '@/utils/getRandomIndexes';
 
 export const MainPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [searchQuery, setSearchQuery] = useState('');
   const [movieList, setMovieList] = useState<MovieInterface[]>([]);
-  const [trendingMovies, setTrendingMovies] = useState<TrendingMovie[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<TrendingInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-
   const debouncedQuery = useDebounce(searchQuery, 700);
+  const [heroPostersPaths, setHeroPostersPaths] = useState<string[]>([]);
 
   useEffect(() => {
     fetchGenres()
@@ -42,16 +42,12 @@ export const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    getTrendingMovies()
+    fetchTrendingMovies()
       .then((data) => {
-        const mappedTrendingMovies = data.documents.map((doc) => ({
-          searchTerm: doc.searchTerm as string,
-          count: doc.count as number,
-          poster_url: doc.poster_url as string,
-          movie_id: doc.movie_id as number,
-        }));
-
-        setTrendingMovies(mappedTrendingMovies);
+        setTrendingMovies(data.results);
+        const randomIndexes = getRandomIndexes(data.results.length);
+        const selectedPaths = randomIndexes.map((i) => data.results[i].poster_path);
+        setHeroPostersPaths(selectedPaths);
       })
       .catch((e: unknown) => {
         if (e instanceof Error) {
@@ -101,7 +97,7 @@ export const MainPage = () => {
     <div className="wrapper">
       {isLoading && <Spinner />}
 
-      <HeroSection />
+      <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <section className="movies">

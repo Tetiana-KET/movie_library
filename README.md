@@ -32,22 +32,15 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [x] **Search Movies**
       Quickly find specific movies by title using an intuitive search bar.
 
-- [x] **Trending Movies Algorithm**
-      A dynamic system that highlights trending movies based on user searches and popularity.
-- [ ] **Trending Slider with Auto and Manual Navigation**  
-       Animated carousel showcasing trending movies.  
-       The slider automatically scroll in one direction, then smoothly reverse when it reaches the end, creating a continuous motion effect.  
-       Users can also manually navigate through the movies using forward and backward buttons.  
-       If the user scrolls to the end manually, the next interaction resets the slider to the beginning.
+- [x] **Trending Movies Integration**  
+       Displays trending movies fetched from an external API based on popularity.
 
-- [] **Hero Banner Featuring Trending Movies**
-  The homepage features a dynamic hero banner showcasing the most popular movies.
+- [x] **Responsive Trending Slider with Manual Navigation**  
+       A responsive carousel that allows users to manually scroll through trending movies using navigation buttons.  
+       The layout adapts to different screen sizes, ensuring an optimal viewing experience across devices.
 
-- [] **User Authentication (Login/Signup)**
-  Allow users to create accounts to save their favorites and personalize their experience.
-
-- [] **Favorites Management**
-  Add and remove movies from your personal favorites list for quick access to your preferred titles.
+- [x] **Hero Banner Featuring Trending Movies**
+      Displays 3 random trending movies in a stylish hero banner.
 
 - [x] **Details Page with Trailers**
       Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
@@ -65,6 +58,12 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
    A "Scroll to Top" button that appears when the user scrolls down the page.  
    This button allows users to quickly return to the top of the page for easier navigation, especially when browsing long lists of movies.  
    It fades in when the user scrolls down and fades out when the user is at the top of the page.
+
+  - [] **User Authentication (Login/Signup)**
+    Allow users to create accounts to save their favorites and personalize their experience.
+
+- [] **Favorites Management**
+  Add and remove movies from your personal favorites list for quick access to your preferred titles.
 
 - [] **Internationalization (i18n)**
   Support multiple languages to reach a broader audience.
