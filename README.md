@@ -1,8 +1,8 @@
-# Cinemix
+# 🎥 Cinemix
 
-## [Deploy](https://movie-library-cinemix.netlify.app/)
+## 🚀 [Deploy](https://movie-library-cinemix.netlify.app/)
 
-## Description
+## 📝 Description
 
 Movie Library is a modern and responsive web application that allows users to discover, search, and explore a variety of movies. With a clean UI and smooth user experience, it showcases trending content dynamically and ensures accessibility across all devices.
 
@@ -10,7 +10,7 @@ This project uses a free public movie API (TMDB) and therefore full movie playba
 
 Designed as a lightweight and efficient tool for discovering new movies, managing favorites, and watching trailers.
 
-## Key features:
+## ✨ Key features:
 
 - [x] **Browse All Movies**
       Explore a wide range of movies across different genres, with easy navigation through detailed movie listings.
@@ -43,6 +43,15 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [x] **Details Page with Trailers**
       Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
 
+-[] 🎬 Actor Page
+
+- On each movie’s details page, users will see a list of main actors.
+- Clicking on an actor opens a dedicated **Actor Details Page**.
+- The Actor Details Page shows:
+
+  - Actor’s profile info (name, photo, biography, birthdate, etc.).
+  - A list of movies in which the actor has appeared.
+
 - [] **Advanced Filtering**
   Filter movies by release year, genre, or even exclude unwanted genres (e.g., include "comedy" but exclude "thriller").
 
@@ -57,8 +66,8 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
        This button allows users to quickly return to the top of the page for easier navigation, especially when browsing long lists of movies.  
        It fades in when the user scrolls down and fades out when the user is at the top of the page.
 
-  - [] **User Authentication (Login/Signup)**
-    Allow users to create accounts to save their favorites and personalize their experience.
+- [] **User Authentication (Login/Signup)**
+  Allow users to create accounts to save their favorites and personalize their experience.
 
 - [] **Favorites Management**
   Add and remove movies from your personal favorites list for quick access to your preferred titles.
@@ -75,7 +84,7 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [] **Error Handling and Loading States**
   Proper error messages and loading indicators provide clear feedback to users during interactions.
 
-## Technology stack
+## 🛠 Technology stack
 
 - Language: [**TypeScript**](https://www.typescriptlang.org/)
 - Main library: [**React**](https://react.dev/)
@@ -85,14 +94,28 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - Routing: [**React Router**](https://reactrouter.com/en/main)
 - Hosting: [**Netlify**](https://www.netlify.com/)
 - Backend: [**Appwrite**](https://cloud.appwrite.io/console/onboarding)
+- External API: [**The Movie Database (TMDB)**](https://developer.themoviedb.org/docs)
 
-## Visuals
+### 🌐 API Endpoints Used (TMDB)
 
-# Installation
+- `GET /genre/movie/list` — fetch movie genres
+- `GET /movie/{movie_id}` — fetch full movie details
+- `GET /movie/{movie_id}/videos` — fetch trailers
+- `GET /trending/movie/day` — fetch trending movies
+- `GET /search/movie` — search movies by keyword
+
+- `GET /discover/movie` — discover movies (e.g., by popularity)
+- `GET /movie/{movie_id}/credits` — fetch movie cast
+- `GET /person/{person_id}` — fetch actor details
+- `GET /person/{person_id}/movie_credits` — fetch actor's filmography
+
+## 🖼️ Visuals
+
+# ⚙️ Installation
 
 Follow these steps to set up the project locally on your machine.
 
-### Prerequisites
+### 🔧 Prerequisites
 
 Make sure you have node.js installed on your machine before proceeding with the setup or installation process.
 To check if Node.js is installed, you can use the following command:
@@ -129,9 +152,7 @@ npm run dev
 
 This will start the application at http://localhost:5173 (or another available port).
 
-## Usage
-
-## Support
+## 🆘 Support
 
 For any issues or questions, feel free to open an issue or reach out in any way that is comfortable for you.
 
@@ -153,9 +174,9 @@ For any issues or questions, feel free to open an issue or reach out in any way 
   </a>
 </div>
 
-## Scripts available
+## 🧾 Scripts available
 
-### Build
+### 🧱 Build
 
 To build the project run
 
@@ -232,9 +253,3 @@ npm run prettier:fix
 ```
 
 This will run Prettier and format all unformatted files in the src/ directory. It also uses the `--ignore-unknown` flag to avoid formatting files with extensions Prettier doesn't recognize.
-
-## Technical Requirements
-
-## Roadmap
-
-## TODO:
