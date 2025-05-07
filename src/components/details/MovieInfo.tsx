@@ -1,7 +1,7 @@
 import { InfoValues } from '@/components/details/InfoValues';
 import { Companies, Countries, Genre, Language } from '@/models/MovieDetails';
 import { formatInfoTitle } from '@/utils/formatInfoTitle';
-import { HomeButton } from './HomeButton';
+import { BackButton } from '../ui/BackButton';
 
 export interface MovieInfoProps {
   genres: Genre[];
@@ -30,8 +30,8 @@ export const MovieInfo = (props: MovieInfoProps) => {
         ))}
       </div>
 
-      <div className="basis-auto lg:basis-[280px] max-w-[280px] shrink-0 mb-10 lg:mb-0">
-        <HomeButton />
+      <div className="basis-auto lg:basis-[230px] max-w-[230px] shrink-0 mb-10 lg:mb-0">
+        <BackButton />
       </div>
     </div>
   );

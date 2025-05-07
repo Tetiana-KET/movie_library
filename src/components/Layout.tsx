@@ -3,6 +3,7 @@ import { Footer } from './Footer';
 import { ButtonWithArrow } from './ui/ButtonWithArrow';
 import { scrollToTop } from '@/utils/scrollToTop';
 import { useShowTopButton } from '@/hooks/useShowTopButton';
+import { Link } from 'react-router-dom';
 
 export const Layout = () => {
   const { showScrollButton } = useShowTopButton();
@@ -11,7 +12,9 @@ export const Layout = () => {
       <div className="pattern" />
       <header className="py-6">
         <div className="wrapper"></div>
-        <img width={70} height={55} src="/logo.png" alt="logo image" loading="eager" />
+        <Link to="/">
+          <img width={70} height={55} src="/logo.png" alt="logo image" loading="eager" />
+        </Link>
       </header>
       <main className="flex-1 px-5">
         <Outlet />

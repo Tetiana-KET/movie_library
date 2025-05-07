@@ -14,7 +14,12 @@ export const MovieCard = ({ movie }: MovieCard) => {
 
   return (
     <li>
-      <Link to={`/movie/${String(movie.id)}`}>
+      <Link
+        to={`/movie/${String(movie.id)}`}
+        onClick={() => {
+          sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+        }}
+      >
         <figure className="movie-card group">
           <div className="ratio-box">
             <img

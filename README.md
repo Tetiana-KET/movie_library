@@ -52,10 +52,10 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [] **Dark/Light Mode**
   Use a theme toggle to switch between dark and light modes based on user preference.
 
-- [] **Scroll to Top Button**  
-   A "Scroll to Top" button that appears when the user scrolls down the page.  
-   This button allows users to quickly return to the top of the page for easier navigation, especially when browsing long lists of movies.  
-   It fades in when the user scrolls down and fades out when the user is at the top of the page.
+- [x] **Scroll to Top Button**  
+       A "Scroll to Top" button that appears when the user scrolls down the page.  
+       This button allows users to quickly return to the top of the page for easier navigation, especially when browsing long lists of movies.  
+       It fades in when the user scrolls down and fades out when the user is at the top of the page.
 
   - [] **User Authentication (Login/Signup)**
     Allow users to create accounts to save their favorites and personalize their experience.

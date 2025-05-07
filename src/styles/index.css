@@ -55,7 +55,7 @@
   }
 
   .button {
-    @apply bg-light-100/10 p-4 rounded-lg shadow-inner text-center shadow-light-100/10 text-light-100 duration-300;
+    @apply bg-light-100/10 p-4 rounded-lg shadow-inner text-center shadow-light-100/10 text-light-100 duration-300 cursor-pointer;
   }
 
   .button-top {

@@ -3,12 +3,13 @@ import TrendingMovies from '@/components/TrendingMovies';
 import Search from '@/components/Search';
 import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
+import { MoviesSection } from '@/components/MoviesSection';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useRef, useState } from 'react';
+import { useRestoreScrollPositionOnPop } from '@/hooks/useRestoreScrollPositionOnPop';
 import { useTrendingLoader } from '@/hooks/useTrendingLoader';
 import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMoviesLoader } from '@/hooks/useMoviesLoader';
-import { MoviesSection } from '@/components/MoviesSection';
+import { useRef, useState } from 'react';
 import { scrollToSection } from '@/utils/scrollToSection';
 
 export const MainPage = () => {
@@ -21,6 +22,7 @@ export const MainPage = () => {
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
   useGenresLoader();
+  useRestoreScrollPositionOnPop(movieList.length);
 
   const handleNextButtonClick = () => {
     setCurrentPage((prev) => prev + 1);
