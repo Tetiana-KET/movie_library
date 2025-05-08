@@ -11,6 +11,7 @@ import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMoviesLoader } from '@/hooks/useMoviesLoader';
 import { useRef, useState } from 'react';
 import { scrollToSection } from '@/utils/scrollToSection';
+import { CategoriesSection } from '@/components/categories/CategoriesSection';
 
 export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,6 +20,7 @@ export const MainPage = () => {
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
   const { movieList, totalPages, errorMessage, isLoading } = useMoviesLoader(debouncedQuery, currentPage);
 
+  const [selectedCategory, setSelectedCategory] = useState<string>('movies');
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
   useGenresLoader();
@@ -44,6 +46,7 @@ export const MainPage = () => {
       {isLoading && <Spinner />}
       <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <CategoriesSection onClick={setSelectedCategory} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <MoviesSection movieList={movieList} errorMessage={errorMessage} ref={moviesSectionRef} />
       {movieList.length && (

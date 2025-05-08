@@ -9,7 +9,7 @@ export const BackButton = () => {
         onClick={() => {
           navigate(-1);
         }}
-        className="inline-flex py-4 px-4 gap-2 text-2xl items-center font-semibold cursor-pointer"
+        className="inline-flex py-4 px-4 gap-2 text-2xl items-center font-semibold"
       >
         <span>Go Back</span>
         <ArrowIcon />

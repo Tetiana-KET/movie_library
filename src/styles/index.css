@@ -54,12 +54,16 @@
     @apply pointer-events-none opacity-50;
   }
 
+  button {
+    @apply cursor-pointer duration-300;
+  }
+
   .button {
-    @apply bg-light-100/10 p-4 rounded-lg shadow-inner text-center shadow-light-100/10 text-light-100 duration-300 cursor-pointer;
+    @apply bg-light-100/10 p-4 rounded-lg shadow-inner text-center shadow-light-100/10 text-light-100;
   }
 
   .button-top {
-    @apply opacity-0 -translate-y-10 -rotate-90 fixed z-10 w-[40px] h-[40px] p-0 flex items-center justify-center bottom-5 right-1 cursor-pointer hover:bg-light-100/20;
+    @apply opacity-0 -translate-y-10 -rotate-90 fixed z-10 w-[40px] h-[40px] p-0 flex items-center justify-center bottom-5 right-1 hover:bg-light-100/20;
   }
 
   .button-top__visible {
@@ -120,7 +124,7 @@
       }
 
       button {
-        @apply w-[20px] h-[120px] flex items-center justify-center bg-dark-100 text-light-100 rounded-lg shadow-inner text-center shadow-light-100/10 cursor-pointer transition-colors duration-500 hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
+        @apply w-[20px] h-[120px] flex items-center justify-center bg-dark-100 text-light-100 rounded-lg shadow-inner text-center shadow-light-100/10 transition-colors hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
       }
 
       .carousel_button-wrap.next {
@@ -241,7 +245,7 @@
     }
 
     & .pagination_button {
-      @apply bg-dark-100 min-w-[40px] md:min-w-[45px] lg:min-w-[54px] py-3 px-1 sm:px-1.5 md:px-2 lg:px-3 rounded-lg shadow-inner text-center shadow-light-100/10 cursor-pointer transition-colors duration-500 hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
+      @apply bg-dark-100 min-w-[40px] md:min-w-[45px] lg:min-w-[54px] py-3 px-1 sm:px-1.5 md:px-2 lg:px-3 rounded-lg shadow-inner text-center shadow-light-100/10 transition-colors duration-500 hover:bg-light-100 hover:text-dark-100 text-[10px] xs:text-xs  md:text-base lg:text-lg;
     }
 
     & .pagination_button.active {
@@ -292,4 +296,17 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@utility category-shadow {
+  box-shadow:
+    inset 0 1px 0 0 #f4f4f4,
+    0 4px 8px 0 #cecece;
+}
+
+@utility category-shadow-hover {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 0 #f4f4f4,
+    0 2px 8px 0 #cecece;
 }
