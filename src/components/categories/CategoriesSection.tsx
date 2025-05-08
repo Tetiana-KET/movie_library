@@ -4,10 +4,11 @@ import { Dispatch, SetStateAction } from 'react';
 import { CategoryType } from '@/models/CategoryType';
 
 interface CategoriesSectionProps {
+  selectedCategory: CategoryType;
   setSelectedCategory: Dispatch<SetStateAction<CategoryType>>;
 }
 
-export const CategoriesSection = ({ setSelectedCategory }: CategoriesSectionProps) => {
+export const CategoriesSection = ({ selectedCategory, setSelectedCategory }: CategoriesSectionProps) => {
   return (
     <section className="mb-21">
       <h2>Select Category</h2>
@@ -15,7 +16,11 @@ export const CategoriesSection = ({ setSelectedCategory }: CategoriesSectionProp
         <ul className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {MEDIA_CATEGORIES.map((category) => (
             <li key={category.label}>
-              <CategoryCard category={category} setSelectedCategory={setSelectedCategory} />
+              <CategoryCard
+                category={category}
+                setSelectedCategory={setSelectedCategory}
+                isSelected={selectedCategory.key === category.key}
+              />
             </li>
           ))}
         </ul>

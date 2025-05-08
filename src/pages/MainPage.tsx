@@ -49,7 +49,7 @@ export const MainPage = () => {
       <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
-      <CategoriesSection setSelectedCategory={setSelectedCategory} />
+      <CategoriesSection setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />
       <MoviesSection
         movieList={movieList}
         errorMessage={errorMessage}
