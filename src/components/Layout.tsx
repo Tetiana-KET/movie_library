@@ -13,7 +13,7 @@ export const Layout = () => {
       <header className="py-6">
         <div className="wrapper"></div>
         <Link to="/">
-          <img width={70} height={55} src="/logo.png" alt="logo image" loading="eager" />
+          <img width={150} height={75} src="/logo.png" alt="logo image" loading="eager" />
         </Link>
       </header>
       <main className="flex-1 px-5">
