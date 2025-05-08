@@ -6,11 +6,12 @@ import { useDetailsLoader } from '@/hooks/useDetailsLoader';
 import { useParams } from 'react-router';
 
 export const MovieDetailsPage = () => {
-  const params = useParams();
-  const movieId = params.id;
+  const { mediaType, id } = useParams();
 
-  const { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails } =
-    useDetailsLoader(movieId);
+  const { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails } = useDetailsLoader(
+    mediaType,
+    id,
+  );
 
   return (
     <div className="max-w-[1620px] mx-auto mb-16 text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details">

@@ -2,8 +2,8 @@ import { getApiOptions, BASE_URL } from '@/consts/api';
 import { FETCHING_ERROR_MSG } from '@/consts/messages';
 import { MovieDetails } from '@/models/MovieDetails';
 
-export const fetchMovieDetails = async (id: string): Promise<MovieDetails> => {
-  const endpoint = `${BASE_URL}/movie/${id}?language=en-US`;
+export const fetchMovieDetails = async (type: string, id: string): Promise<MovieDetails> => {
+  const endpoint = `${BASE_URL}/${type}/${id}?language=en-US`;
   const response = await fetch(endpoint, getApiOptions());
 
   if (!response.ok) {

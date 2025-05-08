@@ -30,7 +30,7 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
         </div>
       </div>
       <div className="text-sm xs:text-2xl text-light-100 flex gap-2.5">
-        {releaseDate.split('-')[0] || 'N/A'}
+        {(releaseDate && releaseDate.split('-')[0]) || 'N/A'}
         <span>•</span>
         {
           getAgeRating(

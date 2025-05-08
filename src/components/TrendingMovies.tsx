@@ -1,11 +1,11 @@
-import { TrendingInterface } from '@/models/MovieInterface';
+import { MediaInterface } from '@/models/MovieInterface';
 import React from 'react';
 import { MiniArrowIcon } from './ui/MiniArrowIcon';
 import TrendingCard from './TrendingCard';
 import { useCarousel } from '@/hooks/useCarousel';
 
 interface TrendingMoviesProps {
-  trendingMovies: TrendingInterface[];
+  trendingMovies: MediaInterface[];
 }
 
 const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {

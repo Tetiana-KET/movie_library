@@ -24,6 +24,10 @@ export const fetchMedia = async ({
   }
 
   const data = (await response.json()) as unknown as FetchResultInterface;
+  data.results = data.results.map((item) => ({
+    ...item,
+    media_type: selectedCategory.type,
+  }));
 
   return data;
 };

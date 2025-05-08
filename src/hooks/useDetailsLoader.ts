@@ -5,7 +5,7 @@ import { fetchMovieTrailer } from '@/services/fetchMovieTrailer';
 import { getTrailer } from '@/utils/getTrailer';
 import { useEffect, useState } from 'react';
 
-export const useDetailsLoader = (movieId: string | undefined) => {
+export const useDetailsLoader = (mediaType: string | undefined, movieId: string | undefined) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -40,13 +40,16 @@ export const useDetailsLoader = (movieId: string | undefined) => {
     : null;
 
   useEffect(() => {
-    if (!movieId) return;
+    if (!movieId || !mediaType) return;
 
     const fetchData = async () => {
       setIsLoading(true);
       setErrorMessage('');
       try {
-        const [detailsRes, trailerRes] = await Promise.all([fetchMovieDetails(movieId), fetchMovieTrailer(movieId)]);
+        const [detailsRes, trailerRes] = await Promise.all([
+          fetchMovieDetails(mediaType, movieId),
+          fetchMovieTrailer(mediaType, movieId),
+        ]);
         setMovieDetails(detailsRes);
 
         const bestTrailer = getTrailer(trailerRes.results);
