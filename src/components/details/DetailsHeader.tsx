@@ -19,8 +19,8 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
 
   return (
     <header className="mb-10">
-      <div className="title-wrap">
-        <h1>{title}</h1>
+      <div className="flex justify-between mb-3 gap-3 flex-wrap">
+        <h1 className="mx-0 text-5xl font-bold leading-tight text-white sm:text-[56px] sm:leading-[64px]">{title}</h1>
         <div className="flex gap-1 items-center button">
           <StarIcon size={30} />
           <p className="text-sm xs:text-2xl text-white">

@@ -4,7 +4,6 @@ import { MovieInfo } from '@/components/details/MovieInfo';
 import { Spinner } from '@/components/ui/Spinner';
 import { useDetailsLoader } from '@/hooks/useDetailsLoader';
 import { useParams } from 'react-router';
-import '@/styles/details.css';
 
 export const MovieDetailsPage = () => {
   const params = useParams();
@@ -14,7 +13,7 @@ export const MovieDetailsPage = () => {
     useDetailsLoader(movieId);
 
   return (
-    <div className="details-wrap">
+    <div className="max-w-[1620px] mx-auto mb-16 text-light-100 relative z-1 bg-dark-100 p-3 xs:p-10 rounded-2xl shadow-details">
       {isLoading && <Spinner />}
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       {detailsHeaderProps && <DetailsHeader {...detailsHeaderProps} />}
