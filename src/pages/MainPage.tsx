@@ -8,7 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useRestoreScrollPositionOnPop } from '@/hooks/useRestoreScrollPositionOnPop';
 import { useTrendingLoader } from '@/hooks/useTrendingLoader';
 import { useGenresLoader } from '@/hooks/useGenresLoader';
-import { useMoviesLoader } from '@/hooks/useMoviesLoader';
+import { useMediaLoader } from '@/hooks/useMediaLoader';
 import { useRef, useState } from 'react';
 import { scrollToSection } from '@/utils/scrollToSection';
 import { CategoriesSection } from '@/components/categories/CategoriesSection';
@@ -18,9 +18,11 @@ export const MainPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedQuery = useDebounce(searchQuery, 700);
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
-  const { movieList, totalPages, errorMessage, isLoading } = useMoviesLoader(debouncedQuery, currentPage);
+  const { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory } = useMediaLoader(
+    debouncedQuery,
+    currentPage,
+  );
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('movies');
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
   useGenresLoader();
@@ -46,9 +48,14 @@ export const MainPage = () => {
       {isLoading && <Spinner />}
       <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <CategoriesSection onClick={setSelectedCategory} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
-      <MoviesSection movieList={movieList} errorMessage={errorMessage} ref={moviesSectionRef} />
+      <CategoriesSection setSelectedCategory={setSelectedCategory} />
+      <MoviesSection
+        movieList={movieList}
+        errorMessage={errorMessage}
+        selectedCategory={selectedCategory}
+        ref={moviesSectionRef}
+      />
       {movieList.length && (
         <Pagination
           onNextPageClick={handleNextButtonClick}

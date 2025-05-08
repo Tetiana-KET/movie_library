@@ -43,7 +43,6 @@ export const MovieCard = ({ movie }: MovieCard) => {
                 <p>{vote_average.toFixed(1) || 'N/A'}</p>
               </div>
               <span>•</span>
-
               {genreList.length && (
                 <div className="genres">
                   {genreList.slice(0, 2).map((name) => (
@@ -51,7 +50,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
                   ))}
                 </div>
               )}
-              <p className="year">{release_date.split('-')[0] || 'N/A'}</p>
+              {release_date && <p className="year">{release_date.split('-')[0]}</p>}
             </div>
           </figcaption>
         </figure>

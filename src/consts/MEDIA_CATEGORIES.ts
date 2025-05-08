@@ -1,6 +1,6 @@
 export const MEDIA_CATEGORIES = [
-  { key: 'movies', label: 'Movies', path: '/movies.webp' },
-  { key: 'tv', label: 'TV Shows and Series', path: '/tv.webp' },
-  { key: 'animation', label: 'Animation', path: '/animation.webp' },
-  { key: 'documentaries', label: 'Documentaries', path: '/documentaries.webp' },
+  { type: 'movie', key: 'movie', label: 'Movies', path: '/movies.webp', genreId: null },
+  { type: 'tv', key: 'tv', label: 'TV Shows and Series', path: '/tv.webp', genreId: null },
+  { type: 'movie', key: 'animation', label: 'Animation', path: '/animation.webp', genreId: 16 },
+  { type: 'movie', key: 'documentaries', label: 'Documentaries', path: '/documentaries.webp', genreId: 99 },
 ];
