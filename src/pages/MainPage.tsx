@@ -4,6 +4,7 @@ import Search from '@/components/Search';
 import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { MoviesSection } from '@/components/MoviesSection';
+import { CategoriesSection } from '@/components/categories/CategoriesSection';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useRestoreScrollPositionOnPop } from '@/hooks/useRestoreScrollPositionOnPop';
 import { useTrendingLoader } from '@/hooks/useTrendingLoader';
@@ -11,12 +12,13 @@ import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMediaLoader } from '@/hooks/useMediaLoader';
 import { useRef, useState } from 'react';
 import { scrollToSection } from '@/utils/scrollToSection';
-import { CategoriesSection } from '@/components/categories/CategoriesSection';
+import { useSyncPagination } from '@/hooks/useSyncPagination';
 
 export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const debouncedQuery = useDebounce(searchQuery, 700);
+
+  const { currentPage, setCurrentPage } = useSyncPagination();
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
   const { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory } = useMediaLoader(
     debouncedQuery,
