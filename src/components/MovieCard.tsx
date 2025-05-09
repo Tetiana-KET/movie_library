@@ -24,8 +24,8 @@ export const MovieCard = ({ movie }: MovieCard) => {
           <div className="ratio-box">
             <img
               className="transition-transform duration-300 ease-in-out group-hover:scale-105"
-              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-              alt={`a poster for movie: ${title}`}
+              src={poster_path && `https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={title && `a poster for movie: ${title}`}
               style={{ objectPosition: 'center 35%' }}
               onError={(e) => {
                 const target = e.currentTarget;
@@ -36,7 +36,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
             />
           </div>
           <figcaption className="mt-4">
-            <h3>{title || name}</h3>
+            <h3>{title ?? name}</h3>
             <div className="content">
               <div className="rating">
                 <StarIcon />

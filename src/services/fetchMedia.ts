@@ -16,7 +16,7 @@ export const fetchMedia = async ({
 }: FetchParams): Promise<FetchResultInterface> => {
   const endpoint = query
     ? `${BASE_URL}/search/${selectedCategory.type}?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${String(currentPage)}`
-    : `${BASE_URL}/discover/${selectedCategory.type}?include_adult=false&include_video=false&language=en-US&page=${String(currentPage)}&sort_by=popularity.desc${selectedCategory.genreId ? `&with_genres=${selectedCategory.genreId}` : ''}${selectedCategory.excludedGenres ? `&without_genres=${selectedCategory.excludedGenres.join(',')}` : ''}`;
+    : `${BASE_URL}/discover/${selectedCategory.type}?include_adult=false&include_video=false&language=en-US&page=${String(currentPage)}&sort_by=popularity.desc${selectedCategory.genreId ? `&with_genres=${String(selectedCategory.genreId)}` : ''}${selectedCategory.excludedGenres ? `&without_genres=${selectedCategory.excludedGenres.join(',')}` : ''}`;
   const response = await fetch(endpoint, getApiOptions());
 
   if (!response.ok) {

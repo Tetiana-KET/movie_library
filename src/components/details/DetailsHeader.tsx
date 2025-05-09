@@ -33,7 +33,7 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
         </div>
       </div>
       <div className="text-sm xs:text-2xl text-light-100 flex flex-wrap gap-2.5">
-        {(releaseDate && releaseDate.split('-')[0]) || 'N/A'}
+        {releaseDate ? releaseDate.split('-')[0] : 'N/A'}
         <span>•</span>
         {
           getAgeRating(
@@ -44,7 +44,7 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
         {seasonsNumber && (
           <>
             <span>•</span>
-            {seasonsNumber > 1 ? `${seasonsNumber} seasons` : `${seasonsNumber} season`}
+            {seasonsNumber > 1 ? `${String(seasonsNumber)} seasons` : `${String(seasonsNumber)} season`}
           </>
         )}
         {formatRuntime(runtime) && (

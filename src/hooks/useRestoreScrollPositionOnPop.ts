@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useNavigationType } from 'react-router-dom';
+import { NavigationType, useNavigationType } from 'react-router-dom';
 
 export const useRestoreScrollPositionOnPop = (moviesLength: number) => {
   const navigationType = useNavigationType();
 
   useEffect(() => {
-    if (navigationType === 'POP') {
+    if (navigationType === NavigationType.Pop) {
       const savedPosition = sessionStorage.getItem('scrollPosition');
       if (savedPosition && moviesLength) {
         setTimeout(() => {

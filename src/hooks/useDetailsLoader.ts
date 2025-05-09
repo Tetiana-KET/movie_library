@@ -94,6 +94,6 @@ export const useDetailsLoader = (mediaType: string | undefined, movieId: string 
       }
     };
     void fetchData();
-  }, [movieId]);
+  }, [movieId, mediaType]);
   return { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails, isTv };
 };

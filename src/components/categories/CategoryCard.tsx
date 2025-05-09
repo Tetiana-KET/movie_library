@@ -20,7 +20,7 @@ export const CategoryCard = ({ category, isSelected, setSelectedCategory }: Cate
         setSelectedCategory(category);
         const newParams = new URLSearchParams(location.search);
         newParams.set('category', category.key);
-        navigate({ search: newParams.toString() });
+        void navigate({ search: newParams.toString() });
       }}
     >
       <figure className="relative">
