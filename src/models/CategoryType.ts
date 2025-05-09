@@ -4,4 +4,5 @@ export type CategoryType = {
   label: string;
   path: string;
   genreId: number | null;
+  excludedGenres?: number[];
 };
