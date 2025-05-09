@@ -5,7 +5,11 @@ import { fetchMedia } from '@/services/fetchMedia';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export const useMediaLoader = (query: string, currentPage: number) => {
+export const useMediaLoader = (
+  query: string,
+  currentPage: number,
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+) => {
   const [movieList, setMovieList] = useState<MediaInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -21,9 +25,11 @@ export const useMediaLoader = (query: string, currentPage: number) => {
     const currentCategory = searchParams.get('category');
     if (currentCategory !== selectedCategory.key) {
       searchParams.set('category', selectedCategory.key);
+      searchParams.set('page', '1');
       setSearchParams(searchParams, { replace: true });
+      setCurrentPage(1);
     }
-  }, [selectedCategory, searchParams, setSearchParams]);
+  }, [selectedCategory, searchParams, setSearchParams, setCurrentPage]);
 
   useEffect(() => {
     setIsLoading(true);

@@ -23,6 +23,7 @@ export const MainPage = () => {
   const { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory } = useMediaLoader(
     debouncedQuery,
     currentPage,
+    setCurrentPage,
   );
 
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
