@@ -40,20 +40,37 @@ export const useDetailsLoader = (mediaType: string | undefined, movieId: string 
           }
         : null;
 
-  const movieInfoProps = movieDetails
-    ? {
-        genres: movieDetails.genres,
-        overview: movieDetails.overview,
-        releaseDate: (movieDetails as MovieDetails).release_date,
-        countries: movieDetails.production_countries,
-        status: movieDetails.status,
-        language: movieDetails.spoken_languages,
-        budget: (movieDetails as MovieDetails).budget,
-        revenue: (movieDetails as MovieDetails).revenue,
-        tagline: movieDetails.tagline,
-        productionCompanies: movieDetails.production_companies,
-      }
-    : null;
+  const movieInfoProps =
+    movieDetails && isMovie
+      ? {
+          genres: movieDetails.genres,
+          overview: movieDetails.overview,
+          homepage: movieDetails.homepage,
+          releaseDate: (movieDetails as MovieDetails).release_date,
+          countries: movieDetails.production_countries,
+          status: movieDetails.status,
+          language: movieDetails.spoken_languages,
+          budget: (movieDetails as MovieDetails).budget,
+          revenue: (movieDetails as MovieDetails).revenue,
+          tagline: movieDetails.tagline,
+          productionCompanies: movieDetails.production_companies,
+        }
+      : movieDetails && isTv
+        ? {
+            genres: movieDetails.genres,
+            overview: movieDetails.overview,
+            homepage: movieDetails.homepage,
+            firstEpisode: (movieDetails as SeriesDetailsInterface).first_air_date,
+            lastEpisode: (movieDetails as SeriesDetailsInterface).last_air_date,
+            seasons: (movieDetails as SeriesDetailsInterface).number_of_seasons,
+            episodes: (movieDetails as SeriesDetailsInterface).number_of_episodes,
+            status: movieDetails.status,
+            countries: movieDetails.production_countries,
+            language: movieDetails.spoken_languages,
+            tagline: movieDetails.tagline,
+            productionCompanies: movieDetails.production_companies,
+          }
+        : null;
 
   useEffect(() => {
     if (!movieId || !mediaType) return;
@@ -78,7 +95,5 @@ export const useDetailsLoader = (mediaType: string | undefined, movieId: string 
     };
     void fetchData();
   }, [movieId]);
-  console.log(movieDetails);
-
-  return { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails };
+  return { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails, isTv };
 };

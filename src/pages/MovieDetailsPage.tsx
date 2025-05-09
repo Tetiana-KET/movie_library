@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 export const MovieDetailsPage = () => {
   const { mediaType, id } = useParams();
 
-  const { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails } = useDetailsLoader(
+  const { errorMessage, isLoading, trailer, detailsHeaderProps, movieInfoProps, movieDetails, isTv } = useDetailsLoader(
     mediaType,
     id,
   );
@@ -24,7 +24,7 @@ export const MovieDetailsPage = () => {
         backdropPath={movieDetails?.backdrop_path}
         posterPath={movieDetails?.poster_path}
       />
-      {movieInfoProps && <MovieInfo {...movieInfoProps} />}
+      {movieInfoProps && <MovieInfo {...movieInfoProps} isTv={isTv} />}
     </div>
   );
 };
