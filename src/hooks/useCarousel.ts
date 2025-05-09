@@ -23,12 +23,14 @@ export const useCarousel = (itemsLength: number) => {
     updateSizes();
     window.addEventListener('resize', updateSizes);
 
-    return () => window.removeEventListener('resize', updateSizes);
+    return () => {
+      window.removeEventListener('resize', updateSizes);
+    };
   }, []);
 
   useEffect(() => {
     if (sliderTrackRef.current && slideWidth) {
-      sliderTrackRef.current.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+      sliderTrackRef.current.style.transform = `translateX(-${String(slideIndex * slideWidth)}px)`;
     }
   }, [slideIndex, slideWidth]);
 

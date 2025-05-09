@@ -1,11 +1,11 @@
-import { TrendingInterface } from '@/models/MovieInterface';
+import { MediaInterface } from '@/models/MovieInterface';
 import React from 'react';
 import { MiniArrowIcon } from './ui/MiniArrowIcon';
 import TrendingCard from './TrendingCard';
 import { useCarousel } from '@/hooks/useCarousel';
 
 interface TrendingMoviesProps {
-  trendingMovies: TrendingInterface[];
+  trendingMovies: MediaInterface[];
 }
 
 const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
@@ -18,7 +18,7 @@ const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
       <h2>Popular now</h2>
       <div className="carousel_container">
         <div className={`carousel_button-wrap prev ${slideIndex === 0 ? 'hidden' : ''}`}>
-          <button onClick={prevSlide}>
+          <button type="button" onClick={prevSlide}>
             <MiniArrowIcon />
           </button>
         </div>
@@ -32,7 +32,7 @@ const TrendingMovies = ({ trendingMovies }: TrendingMoviesProps) => {
           )}
         </div>
         <div className={`carousel_button-wrap next ${slideIndex === maxIndex ? 'hidden' : ''}`}>
-          <button onClick={nextSlide}>
+          <button type="button" onClick={nextSlide}>
             <MiniArrowIcon />
           </button>
         </div>

@@ -1,12 +1,8 @@
-import { MovieInterface, TrendingInterface } from './MovieInterface';
+import { MediaInterface } from './MovieInterface';
 
 export interface FetchResultInterface {
   page: number;
-  results: MovieInterface[];
+  results: MediaInterface[];
   total_pages: number;
   total_results: number;
-}
-
-export interface FetchTrendingResultInterface extends FetchResultInterface {
-  results: TrendingInterface[];
 }

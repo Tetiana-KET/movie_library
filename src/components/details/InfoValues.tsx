@@ -1,76 +1,53 @@
-import { MovieInfoProps } from '@/components/details/MovieInfo';
-import { Companies, Countries, Genre, Language } from '@/models/MovieDetails';
+import { MovieInfoProps, SeriesInfoProps } from '@/components/details/MovieInfo';
 import { formatDate } from '@/utils/formatDate';
 import { formatMillions } from '@/utils/formatMillions';
+import { GenreList } from './GenreList';
+import { CountriesList } from './CountriesList';
+import { LanguageList } from './LanguageList';
+import { CompaniesList } from './CompaniesList';
+import { Link } from 'react-router-dom';
 
 interface InfoValuesProps {
-  title: keyof MovieInfoProps;
+  title: keyof MovieInfoProps | keyof SeriesInfoProps;
   value: unknown;
+  isTv: boolean;
 }
 
-export const InfoValues = ({ title, value }: InfoValuesProps) => {
+export const InfoValues = ({ title, value, isTv }: InfoValuesProps) => {
   if (title === 'genres' && Array.isArray(value)) {
-    return (
-      <ul className="flex flex-wrap gap-3 font-semibold text-white">
-        {value.map((g: Genre) => {
-          return (
-            <li key={g.id} className="button py-2 px-5">
-              {g.name}
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <GenreList value={value} />;
   }
 
   if (title === 'countries' && Array.isArray(value)) {
-    return (
-      <ul className="list-disc flex gap-6 flex-wrap overflow-hidden">
-        {value.map((c: Countries, i: number) => {
-          return (
-            <li key={c.iso_3166_1} className={i === 0 ? 'list-none' : ''}>
-              {c.name}
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <CountriesList value={value} />;
   }
 
   if (title === 'language' && Array.isArray(value)) {
-    return (
-      <ul className="list-disc flex gap-6 flex-wrap overflow-hidden">
-        {value.map((l: Language, i: number) => {
-          return (
-            <li key={l.iso_639_1} className={i === 0 ? 'list-none' : ''}>
-              {l.english_name}
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <LanguageList value={value} />;
   }
 
   if (title === 'productionCompanies' && Array.isArray(value)) {
-    return (
-      <ul className="list-disc flex gap-x-6 gap-y-2 flex-wrap overflow-hidden">
-        {value.map((c: Companies, i: number) => {
-          return (
-            <li key={c.id} className={i === 0 ? 'list-none' : ''}>
-              {c.name}
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <CompaniesList value={value} />;
   }
 
-  if (typeof value === 'number') {
+  if (!isTv && typeof value === 'number') {
     return <p>{formatMillions(value)}</p>;
   }
 
-  if (title === 'releaseDate' && typeof value === 'string') {
+  if (isTv && typeof value === 'number') {
+    return <p>{value.toLocaleString()}</p>;
+  }
+
+  if ((title === 'releaseDate' || title === 'lastEpisode' || title === 'firstEpisode') && typeof value === 'string') {
     return <p>{formatDate(value)}</p>;
+  }
+
+  if (title === 'homepage' && typeof value === 'string' && value) {
+    return (
+      <Link to={value} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline break-all">
+        {value}
+      </Link>
+    );
   }
 
   if (typeof value === 'string') {

@@ -12,15 +12,18 @@ interface DetailsHeaderProps {
   genres: Genre[];
   runtime: number;
   adult: boolean;
+  seasonsNumber?: number;
 }
 
 export const DetailsHeader = (props: DetailsHeaderProps) => {
-  const { title, voteAverage, voteCount, releaseDate, genres, runtime, adult } = props;
+  const { title, voteAverage, voteCount, releaseDate, genres, runtime, adult, seasonsNumber } = props;
 
   return (
     <header className="mb-10">
-      <div className="title-wrap">
-        <h1>{title}</h1>
+      <div className="flex justify-between mb-3 gap-3 flex-wrap">
+        <h1 className="mx-0 text-5xl font-bold leading-tight text-white text-[36px] sm:text-[56px] sm:leading-[64px] max-w-none">
+          {title}
+        </h1>
         <div className="flex gap-1 items-center button">
           <StarIcon size={30} />
           <p className="text-sm xs:text-2xl text-white">
@@ -29,8 +32,8 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
           </p>
         </div>
       </div>
-      <div className="text-sm xs:text-2xl text-light-100 flex gap-2.5">
-        {releaseDate.split('-')[0] || 'N/A'}
+      <div className="text-sm xs:text-2xl text-light-100 flex flex-wrap gap-2.5">
+        {releaseDate ? releaseDate.split('-')[0] : 'N/A'}
         <span>•</span>
         {
           getAgeRating(
@@ -38,8 +41,18 @@ export const DetailsHeader = (props: DetailsHeaderProps) => {
             genres.map((genreObj) => genreObj.id),
           ).label
         }
-        <span>•</span>
-        {formatRuntime(runtime)}
+        {seasonsNumber && (
+          <>
+            <span>•</span>
+            {seasonsNumber > 1 ? `${String(seasonsNumber)} seasons` : `${String(seasonsNumber)} season`}
+          </>
+        )}
+        {formatRuntime(runtime) && (
+          <>
+            <span>•</span>
+            {formatRuntime(runtime)}
+          </>
+        )}
       </div>
     </header>
   );

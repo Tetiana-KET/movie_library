@@ -1,10 +1,10 @@
-import { TrendingInterface } from '@/models/MovieInterface';
+import { MediaInterface } from '@/models/MovieInterface';
 import { fetchTrendingMovies } from '@/services/fetchTrendingMovies';
 import { getRandomIndexes } from '@/utils/getRandomIndexes';
 import { useEffect, useState } from 'react';
 
 export const useTrendingLoader = () => {
-  const [trendingMovies, setTrendingMovies] = useState<TrendingInterface[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<MediaInterface[]>([]);
   const [heroPostersPaths, setHeroPostersPaths] = useState<string[]>([]);
 
   useEffect(() => {

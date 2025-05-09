@@ -8,13 +8,15 @@ export interface MovieInterface {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: string;
-  title: string;
+  release_date?: string;
+  first_air_date?: string;
+  title?: string;
+  name?: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
 }
 
-export interface TrendingInterface extends MovieInterface {
+export interface MediaInterface extends MovieInterface {
   media_type: string;
 }

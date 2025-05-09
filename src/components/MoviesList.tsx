@@ -1,8 +1,8 @@
-import { MovieInterface } from '@/models/MovieInterface';
+import { MediaInterface } from '@/models/MovieInterface';
 import { MovieCard } from './MovieCard';
 
 interface MovieListProps {
-  movieList: MovieInterface[];
+  movieList: MediaInterface[];
 }
 
 export const MoviesList = ({ movieList }: MovieListProps) => {
