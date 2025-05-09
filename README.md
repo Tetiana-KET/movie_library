@@ -12,7 +12,7 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 
 ## ✨ Key features:
 
-- [x] **Browse All Movies**
+- [x] **Browse All Movies and Series**
       Explore a wide range of movies across different genres, with easy navigation through detailed movie listings.
       **Note:** Only the first 10,000 results (500 pages) are available due to limitations of the _free_ API tier.
 
@@ -27,11 +27,11 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
       - Responsive adjustments to reduce visible buttons on smaller screens.
       - Maximum of 500 pages displayed due to limitations of the free API.
 
-- [x] **Search Movies**
+- [x] **Search Movies and Series**
       Quickly find specific movies by title using an intuitive search bar.
 
-- [x] **Trending Movies Integration**  
-       Displays trending movies fetched from an external API based on popularity.
+- [x] **Trending Media Integration**  
+       Displays trending movies and series fetched from an external API based on popularity.
 
 - [x] **Responsive Trending Slider with Manual Navigation**  
        A responsive carousel that allows users to manually scroll through trending movies using navigation buttons.  
@@ -39,6 +39,14 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 
 - [x] **Hero Banner Featuring Trending Movies**
       Displays 3 random trending movies in a stylish hero banner.
+
+- [x] **Media Category Switching**
+
+      - The project includes functionality to show media content by category (e.g., Movies, Series, Anime, etc.).
+      - Users can select a category from a grid of category cards.
+      - On category selection, the app fetches media data from the TMDB API based on the chosen type.
+      - The selected category is reflected in the URL query parameters, enabling consistent browser navigation (back/forward).
+      - When switching categories, the pagination resets to the first page to avoid inconsistencies.
 
 - [x] **Details Page with Trailers**
       Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.

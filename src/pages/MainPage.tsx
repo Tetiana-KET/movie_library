@@ -15,6 +15,7 @@ import { scrollToSection } from '@/utils/scrollToSection';
 import { useSyncPagination } from '@/hooks/useSyncPagination';
 
 export const MainPage = () => {
+  useGenresLoader();
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 700);
 
@@ -28,7 +29,6 @@ export const MainPage = () => {
 
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
-  useGenresLoader();
   useRestoreScrollPositionOnPop(movieList.length);
 
   const handleNextButtonClick = () => {
