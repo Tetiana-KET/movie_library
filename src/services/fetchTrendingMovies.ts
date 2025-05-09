@@ -3,7 +3,7 @@ import { FETCHING_ERROR_MSG } from '@/consts/messages';
 import { FetchTrendingResultInterface } from '@/models/FetchResultInterface';
 
 export const fetchTrendingMovies = async (): Promise<FetchTrendingResultInterface> => {
-  const endpoint = `${BASE_URL}/trending/movie/day?language=en-US`;
+  const endpoint = `${BASE_URL}/trending/all/day?language=en-US`;
   const response = await fetch(endpoint, getApiOptions());
 
   if (!response.ok) {
