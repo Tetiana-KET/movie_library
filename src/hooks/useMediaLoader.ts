@@ -1,12 +1,12 @@
 import { MEDIA_CATEGORIES } from '@/consts/MEDIA_CATEGORIES';
 import { CategoryType } from '@/models/CategoryType';
-import { MovieInterface } from '@/models/MovieInterface';
+import { MediaInterface } from '@/models/MovieInterface';
 import { fetchMedia } from '@/services/fetchMedia';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export const useMediaLoader = (query: string, currentPage: number) => {
-  const [movieList, setMovieList] = useState<MovieInterface[]>([]);
+  const [movieList, setMovieList] = useState<MediaInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);

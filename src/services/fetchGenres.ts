@@ -6,14 +6,21 @@ interface GenresResponse {
 }
 
 export const fetchGenres = async (): Promise<GenresResponse> => {
-  const endpoint = `${BASE_URL}/genre/movie/list?language=en`;
-  const response = await fetch(endpoint, getApiOptions());
+  const [movieRes, tvRes] = await Promise.all([
+    fetch(`${BASE_URL}/genre/movie/list?language=en`, getApiOptions()),
+    fetch(`${BASE_URL}/genre/tv/list?language=en`, getApiOptions()),
+  ]);
 
-  if (!response.ok) {
+  if (!movieRes.ok || !tvRes.ok) {
     throw new Error('Failed to fetch genres');
   }
 
-  const data = (await response.json()) as unknown as GenresResponse;
+  const [movieData, tvData] = await Promise.all([
+    (await movieRes.json()) as unknown as GenresResponse,
+    (await tvRes.json()) as unknown as GenresResponse,
+  ]);
 
-  return data;
+  return {
+    genres: [...movieData.genres, ...tvData.genres],
+  };
 };
