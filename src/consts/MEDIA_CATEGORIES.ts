@@ -1,5 +1,5 @@
 export const MEDIA_CATEGORIES = [
-  { type: 'movie', key: 'movie', label: 'Movies', path: '/movies.webp', genreId: null },
+  { type: 'movie', key: 'movie', label: 'Movies', path: '/movies.webp', genreId: null, excludedGenres: [16] },
   {
     type: 'tv',
     key: 'tv',
