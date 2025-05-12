@@ -2,6 +2,7 @@ import { MediaInterface } from '@/models/MovieInterface';
 import { StarIcon } from './ui/StarIcon';
 import { Link } from 'react-router-dom';
 import { getGenreList } from '@/utils/getGenreList';
+import { getImagePath } from '@/utils/getImagePath';
 
 interface MovieCard {
   movie: MediaInterface;
@@ -24,7 +25,7 @@ export const MovieCard = ({ movie }: MovieCard) => {
           <div className="ratio-box">
             <img
               className="transition-transform duration-300 ease-in-out group-hover:scale-105"
-              src={poster_path && `https://image.tmdb.org/t/p/w500${poster_path}`}
+              src={getImagePath(poster_path)}
               alt={title && `a poster for movie: ${title}`}
               style={{ objectPosition: 'center 35%' }}
               onError={(e) => {

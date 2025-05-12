@@ -1,4 +1,5 @@
 import { MEDIA_CATEGORIES } from '@/consts/MEDIA_CATEGORIES';
+import { SORT_OPTIONS, SortOptions } from '@/consts/SORT_OPTIONS';
 import { CategoryType } from '@/models/CategoryType';
 import { MediaInterface } from '@/models/MovieInterface';
 import { fetchMedia } from '@/services/fetchMedia';
@@ -21,6 +22,10 @@ export const useMediaLoader = (
   const initialCategory = MEDIA_CATEGORIES.find((c) => c.key === categoryFromParams) ?? MEDIA_CATEGORIES[0];
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>(initialCategory);
 
+  const sortByFromParams = searchParams.get('sortBy');
+  const initialSortBy = SORT_OPTIONS.find((o) => o.value === sortByFromParams) ?? SORT_OPTIONS[0];
+  const [sortBy, setSortBy] = useState<SortOptions>(initialSortBy);
+
   useEffect(() => {
     const currentCategory = searchParams.get('category');
     if (currentCategory !== selectedCategory.key) {
@@ -32,10 +37,20 @@ export const useMediaLoader = (
   }, [selectedCategory, searchParams, setSearchParams, setCurrentPage]);
 
   useEffect(() => {
+    const currentSort = searchParams.get('sortBy');
+    if (currentSort !== sortBy.value) {
+      searchParams.set('sortBy', sortBy.value);
+      searchParams.set('page', '1');
+      setSearchParams(searchParams, { replace: true });
+      setCurrentPage(1);
+    }
+  }, [sortBy, searchParams, setSearchParams, setCurrentPage]);
+
+  useEffect(() => {
     setIsLoading(true);
     setErrorMessage('');
 
-    fetchMedia({ query, currentPage, selectedCategory })
+    fetchMedia({ query, currentPage, selectedCategory, sortBy: sortBy.value })
       .then((data) => {
         setMovieList(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
@@ -52,7 +67,7 @@ export const useMediaLoader = (
       .finally(() => {
         setIsLoading(false);
       });
-  }, [query, currentPage, selectedCategory]);
+  }, [query, currentPage, selectedCategory, sortBy]);
 
-  return { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory };
+  return { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory, sortBy, setSortBy };
 };

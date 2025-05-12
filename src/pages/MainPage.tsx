@@ -21,11 +21,8 @@ export const MainPage = () => {
 
   const { currentPage, setCurrentPage } = useSyncPagination();
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
-  const { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory } = useMediaLoader(
-    debouncedQuery,
-    currentPage,
-    setCurrentPage,
-  );
+  const { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory, sortBy, setSortBy } =
+    useMediaLoader(debouncedQuery, currentPage, setCurrentPage);
 
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -58,6 +55,9 @@ export const MainPage = () => {
         errorMessage={errorMessage}
         selectedCategory={selectedCategory}
         ref={moviesSectionRef}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        debouncedQuery={debouncedQuery}
       />
       {movieList.length && (
         <Pagination
