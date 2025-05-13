@@ -63,8 +63,8 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
 - [] **Advanced Filtering**
   Filter movies by release year, genre, or even exclude unwanted genres (e.g., include "comedy" but exclude "thriller").
 
-- [] **Sorting Functionality**
-  Sort movies by release year, rating, popularity, or other available fields for a more personalized browsing experience.
+- [x] **Sorting Functionality**
+      Sort movies by release year, rating, popularity, vote count in asc and desc order.
 
 - [] **Dark/Light Mode**
   Use a theme toggle to switch between dark and light modes based on user preference.
@@ -90,7 +90,7 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
       Fully responsive layout down to 320px screen width, ensuring a seamless experience across mobile, tablet, and desktop devices.
 
 - [] **Error Handling and Loading States**
-  Proper error messages and loading indicators provide clear feedback to users during interactions.
+  Proper error messages and loading indicators provide clear feedback to users during interactions. (Error boundary)
 
 ## 🛠 Technology stack
 

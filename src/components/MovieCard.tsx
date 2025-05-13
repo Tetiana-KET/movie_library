@@ -28,20 +28,15 @@ export const MovieCard = ({ movie }: MovieCard) => {
               src={getImagePath(poster_path)}
               alt={title && `a poster for movie: ${title}`}
               style={{ objectPosition: 'center 35%' }}
-              onError={(e) => {
-                const target = e.currentTarget;
-                target.onerror = null;
-                target.src = '/no-poster.webp';
-              }}
               loading="lazy"
             />
           </div>
           <figcaption className="mt-4">
-            <h3>{title ?? name}</h3>
+            <h3>{title ?? name ?? 'N/A'}</h3>
             <div className="content">
               <div className="rating">
                 <StarIcon />
-                <p>{vote_average.toFixed(1) || 'N/A'}</p>
+                <p>{(vote_average && vote_average.toFixed(1)) || 'N/A'}</p>
               </div>
               <span>•</span>
               {genreList.length && (
