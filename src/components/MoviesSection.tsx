@@ -11,7 +11,6 @@ interface MoviesSectionProps {
   ref?: React.Ref<HTMLDivElement>;
   sortBy: SortOptions;
   setSortBy: (value: SortOptions) => void;
-  debouncedQuery: string;
 }
 
 export const MoviesSection = ({
@@ -21,15 +20,14 @@ export const MoviesSection = ({
   ref,
   sortBy,
   setSortBy,
-  debouncedQuery,
 }: MoviesSectionProps) => {
   return (
     <section ref={ref} className="movies">
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       {movieList.length ? (
-        <div className="flex gap-3 justify-between items-center flex-wrap mb-7">
-          <h2 className="mb-0 flex  h-full">{debouncedQuery ? 'Search Results' : selectedCategory.label}</h2>{' '}
-          <Sorting sortBy={sortBy} setSortBy={setSortBy} />
+        <div className="flex gap-3 h-[58px] justify-between items-center flex-wrap mb-7">
+          <h2 className="mb-0 flex  ">{selectedCategory.key === 'all' ? 'All results' : selectedCategory.label}</h2>{' '}
+          {selectedCategory.key !== 'all' && <Sorting sortBy={sortBy} setSortBy={setSortBy} />}
         </div>
       ) : (
         <h2>No results found. Try a different search.</h2>
