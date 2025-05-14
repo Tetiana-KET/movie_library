@@ -22,7 +22,7 @@ export const MoviesSection = ({
   setSortBy,
 }: MoviesSectionProps) => {
   return (
-    <section ref={ref} className="movies">
+    <section ref={ref} className="movies pt-21">
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       {movieList.length ? (
         <div className="flex gap-3 h-[58px] justify-between items-center flex-wrap mb-7">

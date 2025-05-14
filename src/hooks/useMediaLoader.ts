@@ -6,8 +6,9 @@ import { fetchMedia } from '@/services/fetchMedia';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from './useDebounce';
+import { scrollToSection } from '@/utils/scrollToSection';
 
-export const useMediaLoader = () => {
+export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement | null>) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(() => {
@@ -32,7 +33,7 @@ export const useMediaLoader = () => {
     return searchParams.get('query') ?? '';
   });
 
-  const debouncedQuery = useDebounce(searchQuery, 500);
+  const debouncedQuery = useDebounce(searchQuery, 800);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -79,6 +80,10 @@ export const useMediaLoader = () => {
       .then((data) => {
         setMovieList(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
+        const isSearchActive = searchQuery !== '' && searchQuery !== debouncedQuery;
+        if (!isSearchActive && moviesSectionRef.current) {
+          scrollToSection(moviesSectionRef);
+        }
       })
       .catch((e: unknown) => {
         if (e instanceof Error) {

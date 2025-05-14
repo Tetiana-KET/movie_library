@@ -15,7 +15,7 @@ export const CategoriesSection = ({
   setCurrentPage,
 }: CategoriesSectionProps) => {
   return (
-    <section className="mb-21">
+    <section>
       <h2>Select Category</h2>
       <nav>
         <ul className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
