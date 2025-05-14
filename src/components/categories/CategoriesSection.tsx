@@ -6,9 +6,14 @@ import { CategoryType } from '@/models/CategoryType';
 interface CategoriesSectionProps {
   selectedCategory: CategoryType;
   setSelectedCategory: Dispatch<SetStateAction<CategoryType>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const CategoriesSection = ({ selectedCategory, setSelectedCategory }: CategoriesSectionProps) => {
+export const CategoriesSection = ({
+  selectedCategory,
+  setSelectedCategory,
+  setCurrentPage,
+}: CategoriesSectionProps) => {
   return (
     <section className="mb-21">
       <h2>Select Category</h2>
@@ -20,6 +25,7 @@ export const CategoriesSection = ({ selectedCategory, setSelectedCategory }: Cat
                 <CategoryCard
                   category={category}
                   setSelectedCategory={setSelectedCategory}
+                  setCurrentPage={setCurrentPage}
                   isSelected={selectedCategory.key === category.key}
                   isDisabled={selectedCategory.key === 'all'}
                 />

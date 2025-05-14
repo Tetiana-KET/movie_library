@@ -3,54 +3,79 @@ import { SORT_OPTIONS, SortOptions } from '@/consts/SORT_OPTIONS';
 import { CategoryType } from '@/models/CategoryType';
 import { MediaInterface } from '@/models/MovieInterface';
 import { fetchMedia } from '@/services/fetchMedia';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useDebounce } from './useDebounce';
 
-export const useMediaLoader = (
-  query: string,
-  currentPage: number,
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
-) => {
+export const useMediaLoader = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [currentPage, setCurrentPage] = useState(() => {
+    return Number(searchParams.get('page')) || 1;
+  });
+
+  const prevPageRef = useRef<number | null>(null);
+
+  const [sortBy, setSortBy] = useState<SortOptions>(() => {
+    const sortByFromParams = searchParams.get('sortBy');
+    return SORT_OPTIONS.find((o) => o.value === sortByFromParams) ?? SORT_OPTIONS[0];
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>(() => {
+    const categoryFromParams = searchParams.get('category');
+    return MEDIA_CATEGORIES.find((c) => c.key === categoryFromParams) ?? MEDIA_CATEGORIES[0];
+  });
+
+  const prevCategoryRef = useRef<CategoryType | null>(null);
+
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return searchParams.get('query') ?? '';
+  });
+
+  const debouncedQuery = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('category', selectedCategory.key);
+
+    // to return from details
+    if (selectedCategory.key !== 'all') {
+      prevCategoryRef.current = selectedCategory;
+      prevPageRef.current = currentPage;
+    }
+
+    params.set('sortBy', sortBy.value);
+    params.set('page', String(currentPage));
+
+    if (debouncedQuery) {
+      params.set('query', debouncedQuery);
+      setSelectedCategory(MEDIA_CATEGORIES.find((c) => c.key === 'all')!);
+      setCurrentPage(1);
+    } else {
+      const fallbackCategory = prevCategoryRef.current ?? MEDIA_CATEGORIES[0];
+      setSelectedCategory(fallbackCategory);
+      params.delete('query');
+      setCurrentPage(prevPageRef.current ?? 1);
+    }
+    setSearchParams(params, { replace: true });
+  }, [currentPage, selectedCategory, sortBy, debouncedQuery]);
+
+  // FETCHING MEDIA
   const [movieList, setMovieList] = useState<MediaInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const categoryFromParams = searchParams.get('category');
-  const initialCategory = MEDIA_CATEGORIES.find((c) => c.key === categoryFromParams) ?? MEDIA_CATEGORIES[0];
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType>(initialCategory);
-
-  const sortByFromParams = searchParams.get('sortBy');
-  const initialSortBy = SORT_OPTIONS.find((o) => o.value === sortByFromParams) ?? SORT_OPTIONS[0];
-  const [sortBy, setSortBy] = useState<SortOptions>(initialSortBy);
-
   useEffect(() => {
-    const currentCategory = searchParams.get('category');
-    if (currentCategory !== selectedCategory.key) {
-      searchParams.set('category', selectedCategory.key);
-      searchParams.set('page', '1');
-      setSearchParams(searchParams, { replace: true });
-      setCurrentPage(1);
+    // wait until the selected Category is updated after multi fetch
+    if (!debouncedQuery && selectedCategory.key === 'all') {
+      return;
     }
-  }, [selectedCategory, searchParams, setSearchParams, setCurrentPage]);
 
-  useEffect(() => {
-    const currentSort = searchParams.get('sortBy');
-    if (currentSort !== sortBy.value) {
-      searchParams.set('sortBy', sortBy.value);
-      searchParams.set('page', '1');
-      setSearchParams(searchParams, { replace: true });
-      setCurrentPage(1);
-    }
-  }, [sortBy, searchParams, setSearchParams, setCurrentPage]);
-
-  useEffect(() => {
     setIsLoading(true);
     setErrorMessage('');
 
-    fetchMedia({ query, currentPage, selectedCategory, sortBy: sortBy.value })
+    fetchMedia({ query: debouncedQuery, currentPage, selectedCategory, sortBy: sortBy.value })
       .then((data) => {
         setMovieList(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
@@ -67,7 +92,20 @@ export const useMediaLoader = (
       .finally(() => {
         setIsLoading(false);
       });
-  }, [query, currentPage, selectedCategory, sortBy]);
+  }, [selectedCategory, debouncedQuery, currentPage, sortBy]);
 
-  return { movieList, totalPages, errorMessage, isLoading, selectedCategory, setSelectedCategory, sortBy, setSortBy };
+  return {
+    movieList,
+    totalPages,
+    errorMessage,
+    isLoading,
+    selectedCategory,
+    setSelectedCategory,
+    sortBy,
+    setSortBy,
+    searchQuery,
+    setSearchQuery,
+    currentPage,
+    setCurrentPage,
+  };
 };

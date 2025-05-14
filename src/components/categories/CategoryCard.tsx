@@ -1,17 +1,22 @@
 import { CategoryType } from '@/models/CategoryType';
 import { Dispatch, SetStateAction } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface CategoryCardProps {
   category: CategoryType;
   isSelected: boolean;
   isDisabled: boolean;
   setSelectedCategory: Dispatch<SetStateAction<CategoryType>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const CategoryCard = ({ category, isSelected, isDisabled, setSelectedCategory }: CategoryCardProps) => {
+export const CategoryCard = ({
+  category,
+  isSelected,
+  isDisabled,
+  setSelectedCategory,
+  setCurrentPage,
+}: CategoryCardProps) => {
   const { label, path } = category;
-  const navigate = useNavigate();
 
   return (
     <button
@@ -19,9 +24,7 @@ export const CategoryCard = ({ category, isSelected, isDisabled, setSelectedCate
       type="button"
       onClick={() => {
         setSelectedCategory(category);
-        const newParams = new URLSearchParams(location.search);
-        newParams.set('category', category.key);
-        void navigate({ search: newParams.toString() });
+        setCurrentPage(1);
       }}
     >
       <figure className="relative">

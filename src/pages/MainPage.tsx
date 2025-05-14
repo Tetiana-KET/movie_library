@@ -11,12 +11,10 @@ import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMediaLoader } from '@/hooks/useMediaLoader';
 import { useRef } from 'react';
 import { scrollToSection } from '@/utils/scrollToSection';
-import { useSyncPagination } from '@/hooks/useSyncPagination';
 
 export const MainPage = () => {
   useGenresLoader();
 
-  const { currentPage, setCurrentPage } = useSyncPagination();
   const { trendingMovies, heroPostersPaths } = useTrendingLoader();
   const {
     movieList,
@@ -29,19 +27,21 @@ export const MainPage = () => {
     setSortBy,
     searchQuery,
     setSearchQuery,
-  } = useMediaLoader(currentPage, setCurrentPage);
+    currentPage,
+    setCurrentPage,
+  } = useMediaLoader();
 
   const moviesSectionRef = useRef<HTMLDivElement | null>(null);
 
-  useRestoreScrollPositionOnPop(movieList.length);
+  useRestoreScrollPositionOnPop(movieList.length, isLoading);
 
   const handleNextButtonClick = () => {
-    setCurrentPage((prev) => prev + 1);
+    setCurrentPage((prev: number) => prev + 1);
     scrollToSection(moviesSectionRef);
   };
 
   const handlePrevButtonClick = () => {
-    setCurrentPage((prev) => prev - 1);
+    setCurrentPage((prev: number) => prev - 1);
     scrollToSection(moviesSectionRef);
   };
 
@@ -56,7 +56,11 @@ export const MainPage = () => {
       <HeroSection heroPosterPaths={heroPostersPaths} />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
-      <CategoriesSection setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />
+      <CategoriesSection
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+        setCurrentPage={setCurrentPage}
+      />
       <MoviesSection
         movieList={movieList}
         errorMessage={errorMessage}
