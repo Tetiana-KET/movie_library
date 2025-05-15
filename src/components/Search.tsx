@@ -6,11 +6,10 @@ import { CrossIcon } from './ui/CrossIcon';
 interface SearchProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   moviesSectionRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const Search = ({ searchQuery, setSearchQuery, setCurrentPage, moviesSectionRef }: SearchProps) => {
+const Search = ({ searchQuery, setSearchQuery, moviesSectionRef }: SearchProps) => {
   const [inputValue, setInputValue] = useState(searchQuery);
 
   // insert query from props into the input, on mounting
@@ -28,7 +27,6 @@ const Search = ({ searchQuery, setSearchQuery, setCurrentPage, moviesSectionRef 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchQuery(inputValue.trim());
-    setCurrentPage(1);
 
     setTimeout(() => {
       scrollToSection(moviesSectionRef);

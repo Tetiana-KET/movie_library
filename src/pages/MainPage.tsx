@@ -56,12 +56,7 @@ export const MainPage = () => {
     <div className="wrapper">
       {isLoading && <Spinner />}
       <HeroSection heroPosterPaths={heroPostersPaths} />
-      <Search
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        setCurrentPage={setCurrentPage}
-        moviesSectionRef={moviesSectionRef}
-      />
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} moviesSectionRef={moviesSectionRef} />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <CategoriesSection
         setSelectedCategory={setSelectedCategory}

@@ -5,14 +5,20 @@ import { MediaInterface } from '@/models/MovieInterface';
 import { fetchMedia } from '@/services/fetchMedia';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
 export const useMediaLoader = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = sessionStorage.getItem('beforeSearchCurPage');
+    const category = searchParams.get('category');
+    if (category && category !== 'all' && savedPage) {
+      sessionStorage.removeItem('beforeSearchCurPage');
+      return Number(savedPage);
+    }
+
     return Number(searchParams.get('page')) || 1;
   });
-
-  const prevPageRef = useRef<number | null>(null);
 
   const [sortBy, setSortBy] = useState<SortOptions>(() => {
     const sortByFromParams = searchParams.get('sortBy');
@@ -24,16 +30,37 @@ export const useMediaLoader = () => {
     return MEDIA_CATEGORIES.find((c) => c.key === categoryFromParams) ?? MEDIA_CATEGORIES[0];
   });
 
-  const prevCategoryRef = useRef<CategoryType | null>(null);
-
   const [searchQuery, setSearchQuery] = useState(() => {
     return searchParams.get('query') ?? '';
   });
 
+  const prevCategoryRef = useRef<CategoryType | null>(null);
+  const prevQueryRef = useRef<string | null>(null);
+
+  // save current page before the search and restore it after clearing the query
+  useEffect(() => {
+    const wasEmpty = prevQueryRef.current === '';
+    const isNowSearching = searchQuery !== '';
+
+    if (wasEmpty && isNowSearching) {
+      sessionStorage.setItem('beforeSearchCurPage', String(currentPage));
+      setCurrentPage(1);
+    }
+
+    if (!isNowSearching && !wasEmpty) {
+      const savedPage = sessionStorage.getItem('beforeSearchCurPage');
+      if (savedPage) {
+        setCurrentPage(Number(savedPage));
+        sessionStorage.removeItem('beforeSearchCurPage');
+      }
+    }
+
+    prevQueryRef.current = searchQuery;
+  }, [searchQuery]);
+
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('category', selectedCategory.key);
-    prevPageRef.current = currentPage;
 
     // to return from details
     if (selectedCategory.key !== 'all') {
@@ -50,7 +77,6 @@ export const useMediaLoader = () => {
       const fallbackCategory = prevCategoryRef.current ?? MEDIA_CATEGORIES[0];
       setSelectedCategory(fallbackCategory);
       params.delete('query');
-      setCurrentPage(prevPageRef.current ?? 1);
     }
     setSearchParams(params, { replace: true });
   }, [currentPage, selectedCategory, sortBy, searchQuery]);
@@ -62,7 +88,7 @@ export const useMediaLoader = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // wait until the selected Category is updated after multi fetch
+    // prevent fetching while category isn't updated after clearing the search
     if (!searchQuery && selectedCategory.key === 'all') {
       return;
     }
