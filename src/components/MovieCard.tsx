@@ -1,8 +1,9 @@
 import { MediaInterface } from '@/models/MovieInterface';
-import { StarIcon } from './ui/StarIcon';
-import { Link } from 'react-router-dom';
 import { getGenreList } from '@/utils/getGenreList';
 import { getImagePath } from '@/utils/getImagePath';
+import { saveScrollPosition } from '@/utils/saveScrollPosition';
+import { Link } from 'react-router-dom';
+import { StarIcon } from './ui/StarIcon';
 
 interface MovieCard {
   movie: MediaInterface;
@@ -12,15 +13,13 @@ export const MovieCard = ({ movie }: MovieCard) => {
   const { genre_ids, poster_path, release_date, title, vote_average, first_air_date, name } = movie;
 
   const genreList = getGenreList(genre_ids);
+  const handleClick = () => {
+    saveScrollPosition();
+  };
 
   return (
     <li>
-      <Link
-        to={`/${movie.media_type}/${String(movie.id)}`}
-        onClick={() => {
-          sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-        }}
-      >
+      <Link to={`/${movie.media_type}/${String(movie.id)}`} onClick={handleClick}>
         <figure className="movie-card group">
           <div className="ratio-box">
             <img

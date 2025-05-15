@@ -5,11 +5,12 @@ import { Pagination } from '@/components/Pagination';
 import { Spinner } from '@/components/ui/Spinner';
 import { MoviesSection } from '@/components/MoviesSection';
 import { CategoriesSection } from '@/components/categories/CategoriesSection';
-import { useRestoreScrollPositionOnPop } from '@/hooks/useRestoreScrollPositionOnPop';
 import { useTrendingLoader } from '@/hooks/useTrendingLoader';
 import { useGenresLoader } from '@/hooks/useGenresLoader';
 import { useMediaLoader } from '@/hooks/useMediaLoader';
+import { useRestoreScrollPosition } from '@/hooks/useRestoreScrollPosition';
 import { useRef } from 'react';
+import { scrollToSection } from '@/utils/scrollToSection';
 
 export const MainPage = () => {
   useGenresLoader();
@@ -29,27 +30,38 @@ export const MainPage = () => {
     setSearchQuery,
     currentPage,
     setCurrentPage,
-  } = useMediaLoader(moviesSectionRef);
+  } = useMediaLoader();
 
-  useRestoreScrollPositionOnPop(movieList.length, isLoading);
+  useRestoreScrollPosition({
+    moviesLength: movieList.length,
+    isLoading,
+  });
 
   const handleNextButtonClick = () => {
     setCurrentPage((prev: number) => prev + 1);
+    scrollToSection(moviesSectionRef);
   };
 
   const handlePrevButtonClick = () => {
     setCurrentPage((prev: number) => prev - 1);
+    scrollToSection(moviesSectionRef);
   };
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
+    scrollToSection(moviesSectionRef);
   };
 
   return (
     <div className="wrapper">
       {isLoading && <Spinner />}
       <HeroSection heroPosterPaths={heroPostersPaths} />
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setCurrentPage={setCurrentPage}
+        moviesSectionRef={moviesSectionRef}
+      />
       {trendingMovies.length && <TrendingMovies trendingMovies={trendingMovies} />}
       <CategoriesSection
         setSelectedCategory={setSelectedCategory}

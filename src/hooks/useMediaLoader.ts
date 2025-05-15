@@ -5,10 +5,7 @@ import { MediaInterface } from '@/models/MovieInterface';
 import { fetchMedia } from '@/services/fetchMedia';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDebounce } from './useDebounce';
-import { scrollToSection } from '@/utils/scrollToSection';
-
-export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement | null>) => {
+export const useMediaLoader = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [currentPage, setCurrentPage] = useState(() => {
@@ -33,25 +30,22 @@ export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement 
     return searchParams.get('query') ?? '';
   });
 
-  const debouncedQuery = useDebounce(searchQuery, 800);
-
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('category', selectedCategory.key);
+    prevPageRef.current = currentPage;
 
     // to return from details
     if (selectedCategory.key !== 'all') {
       prevCategoryRef.current = selectedCategory;
-      prevPageRef.current = currentPage;
     }
 
     params.set('sortBy', sortBy.value);
     params.set('page', String(currentPage));
 
-    if (debouncedQuery) {
-      params.set('query', debouncedQuery);
+    if (searchQuery) {
+      params.set('query', searchQuery);
       setSelectedCategory(MEDIA_CATEGORIES.find((c) => c.key === 'all')!);
-      setCurrentPage(1);
     } else {
       const fallbackCategory = prevCategoryRef.current ?? MEDIA_CATEGORIES[0];
       setSelectedCategory(fallbackCategory);
@@ -59,7 +53,7 @@ export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement 
       setCurrentPage(prevPageRef.current ?? 1);
     }
     setSearchParams(params, { replace: true });
-  }, [currentPage, selectedCategory, sortBy, debouncedQuery]);
+  }, [currentPage, selectedCategory, sortBy, searchQuery]);
 
   // FETCHING MEDIA
   const [movieList, setMovieList] = useState<MediaInterface[]>([]);
@@ -69,21 +63,17 @@ export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement 
 
   useEffect(() => {
     // wait until the selected Category is updated after multi fetch
-    if (!debouncedQuery && selectedCategory.key === 'all') {
+    if (!searchQuery && selectedCategory.key === 'all') {
       return;
     }
 
     setIsLoading(true);
     setErrorMessage('');
 
-    fetchMedia({ query: debouncedQuery, currentPage, selectedCategory, sortBy: sortBy.value })
+    fetchMedia({ query: searchQuery, currentPage, selectedCategory, sortBy: sortBy.value })
       .then((data) => {
         setMovieList(data.results);
         setTotalPages(Math.min(data.total_pages, 500));
-        const isSearchActive = searchQuery !== '' && searchQuery !== debouncedQuery;
-        if (!isSearchActive && moviesSectionRef.current) {
-          scrollToSection(moviesSectionRef);
-        }
       })
       .catch((e: unknown) => {
         if (e instanceof Error) {
@@ -97,7 +87,7 @@ export const useMediaLoader = (moviesSectionRef: React.RefObject<HTMLDivElement 
       .finally(() => {
         setIsLoading(false);
       });
-  }, [selectedCategory, debouncedQuery, currentPage, sortBy]);
+  }, [selectedCategory, searchQuery, currentPage, sortBy]);
 
   return {
     movieList,
