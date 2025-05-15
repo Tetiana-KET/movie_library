@@ -10,4 +10,5 @@ export const MEDIA_CATEGORIES = [
   },
   { type: 'movie', key: 'animation', label: 'Animation', path: '/animation.webp', genreId: 16 },
   { type: 'movie', key: 'documentaries', label: 'Documentaries', path: '/documentaries.webp', genreId: 99 },
+  { type: 'multi', key: 'all', label: 'All results', path: null, genreId: null },
 ];
