@@ -48,6 +48,24 @@ Designed as a lightweight and efficient tool for discovering new movies, managin
       - The selected category is reflected in the URL query parameters, enabling consistent browser navigation (back/forward).
       - When switching categories, the pagination resets to the first page to avoid inconsistencies.
 
+- [x] **Seamless URL State Synchronization**
+
+      - *Persistent State Across Navigation*
+      The app synchronizes key UI states (category, page, and search query) with the browser URL using useSearchParams.
+      This ensures deep linking, smooth back/forward navigation, and proper state restoration on reload.
+
+      - *Smart Search Behavior*
+      When performing a search, the current page is saved in sessionStorage; Pagination resets to page 1 for search results;
+      Category switches to all; Other categories are temporarily disabled to avoid mixing search and category filtering.
+      A scroll-to-section animation brings results into view.
+
+      - *Upon clearing the search*: The app restores the previously selected category and page;
+      The search query is removed from the URL; Category buttons are re-enabled.
+
+      - *Deep Linking & Restoration*
+      On direct URL entry (e.g., ?category=drama&page=5), the correct category and page load automatically.
+      On return from the movie details page, scroll position, category, and page are restored for a seamless experience.
+
 - [x] **Details Page with Trailers**
       Access detailed movie pages with full descriptions, ratings, genres, release dates, and integrated trailers for a quick preview.
 
