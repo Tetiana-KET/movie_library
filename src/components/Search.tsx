@@ -11,7 +11,7 @@ interface SearchProps {
 }
 
 const Search = ({ searchQuery, setSearchQuery, setCurrentPage, moviesSectionRef }: SearchProps) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(searchQuery);
 
   // insert query from props into the input, on mounting
   useEffect(() => {
